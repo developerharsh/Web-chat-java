@@ -1,0 +1,7 @@
+.ui.form textarea:not([rows]){
+	height: 18em;
+}
+
+.ui.segment:last-child{
+	margin-top: 100px;
+}

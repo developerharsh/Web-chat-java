@@ -1,0 +1,61 @@
+<html>
+    <head>
+        <title> Signup</title>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
+        <link rel="stylesheet" type="text/css" href="signup.css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+          $("#gen-sel").dropdown();
+        </script>
+            
+    </head>
+
+    <body>
+        <!-- <div class="ui fixed inverted menu">
+            <div class="ui container">
+                <div class="header item"><i class="code icon"></i>Blog Site</div>
+                <a href="/" class="item">Home</a>
+                <a href="/blogs/new" class="item">New Post</a>
+            </div>
+        </div> -->
+
+
+<div class="ui main text container segment">
+    <div class="ui huge header center aligned">Sign-up/<a href="Signin.html">Sign-in</a></div>
+
+    <form class="ui form" method="POST">
+        <div class="field">
+    <label>First Name</label>
+    <input type="text" name="first-name" placeholder="First Name">
+  </div>
+  <div class="field">
+    <label>Last Name</label>
+    <input type="text" name="last-name" placeholder="Last Name">
+  </div>
+
+  <div class="field">
+    <label>Password</label>
+    <input type="text" name="password" placeholder="Password">
+  </div>
+
+  <div class="field">
+     <select name="gender" id="gen-sel" class="ui selection dropdown">
+       <option value="male">Male</option>
+       <option value="female">Female</option>
+     </select>
+  </div>
+
+
+  <div class="field">
+    <div class="ui checkbox">
+      <input type="checkbox" tabindex="0">
+      <label>I agree to the Terms and Conditions</label>
+    </div>
+  </div>
+  <button class="ui button" type="submit">Sign-up</button>
+    </form>
+</div>
+
+
+
+    </body>
+    </html>

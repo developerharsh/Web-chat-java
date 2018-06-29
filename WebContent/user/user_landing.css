@@ -1,0 +1,34 @@
+.ui.text.container {
+    font-size: 1.14285714rem;
+    margin-top: 60px;
+}
+
+
+.ui.huge.header {
+    min-height: 1em;
+    font-size: 2em;
+}
+
+.completed{
+	color: green;
+}
+
+i.icon, i.icons {
+    font-size: 2em;
+    float: right;
+}
+
+.abc{
+	clear: both;
+	display: block;
+}
+.top{
+	position: relative;
+}
+#exc{
+    float: none;
+}
+#new{
+    position: relative;
+    left: 46%
+}
