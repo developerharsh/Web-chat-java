@@ -20,4 +20,9 @@
         </id>
     </class>
     
+    <class name="modules.module_model" table="modules">
+        <id name="module" column="module">
+            <generator class="assigned"></generator>
+        </id>
+    </class>
 </hibernate-mapping>

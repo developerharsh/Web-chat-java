@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="./user/new_comp.jsp">click</a>
+
+	<%= request.getParameter("type")+ " "+request.getParameter("priority")+ " "+request.getParameter("module") %>
+
 </body>
 </html>
