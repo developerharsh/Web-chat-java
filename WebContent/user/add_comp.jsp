@@ -8,7 +8,8 @@
 <%@page import="java.util.Iterator,java.util.List,org.hibernate.*,org.hibernate.cfg.*,java.util.Date,java.text.SimpleDateFormat,complaint.complaint_model" %>
 <%! String data[]=new String[4]; 
 	Integer createdFileName;
-	String savedFileName="null";%>
+	String savedFileName="null";
+	String st;%>
 <% 
 
 Configuration cfg=new Configuration();
@@ -64,6 +65,7 @@ while (iter.hasNext()) {
     	  }
     	 
       }
+      if(fileName!=""){
       Query q= s.createSQLQuery("select * from generate");
       List l = q.list();
       Iterator it = l.iterator();
@@ -89,19 +91,17 @@ while (iter.hasNext()) {
       fi.write( file ) ;
       out.println("Uploaded Filename: " + fileName + "<br>");
       
-      for(i=0;i<data.length;i++){
-    	  System.out.println(data[i]);
       }
       
-      String type="New Requirement";
       complaint_model p = new complaint_model();
-      	p.setType(type);
+      	
       	p.setAttachments(savedFileName);
       	SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm:ss");
           String time = localDateFormat.format(new Date());
       		//System.out.println(time);
         System.out.println(java.sql.Date.valueOf(java.time.LocalDate.now())+" "+time);
       	p.setDateTime(java.sql.Date.valueOf(java.time.LocalDate.now())+" "+time);
+      	st=java.sql.Date.valueOf(java.time.LocalDate.now())+" "+time;
       	p.setModule(data[3]);
       	p.setPriority(data[2]);
       	p.setStatus("new");
@@ -126,8 +126,8 @@ while (iter.hasNext()) {
 %>
 
 <%
-Query q= s.createSQLQuery("select complaintid from complaint where attachments=?");
-q.setParameter(0, savedFileName);
+Query q= s.createSQLQuery("select complaintid from complaint where datetime=?");
+q.setParameter(0, st);
 List l = q.list();
 Iterator it = l.iterator();
 Integer comp_id=0;
