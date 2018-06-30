@@ -25,4 +25,10 @@
             <generator class="assigned"></generator>
         </id>
     </class>
+    
+    <class name="generator.gen_model" table="generate">
+        <id name="number" column="getnumber">
+            <generator class="assigned"></generator>
+        </id>
+    </class>
 </hibernate-mapping>
