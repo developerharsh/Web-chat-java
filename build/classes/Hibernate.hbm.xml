@@ -20,6 +20,22 @@
         </id>
     </class>
     
+    <class name="complaint.complaint_model" table="complaint">
+        <id name="complaintId" column="complaintId">
+            <generator class="native"></generator>
+        </id>
+        <property name="userId" column="userId"> </property>
+        <property name="subject" column="subject"> </property>
+        <property name="module" column="module"> </property>
+        <property name="type" column="type"> </property>
+        <property name="priority" column="priority"> </property>
+        <property name="status" column="status"> </property>
+        <property name="attachments" column="attachments"> </property>
+        <property name="currently_assigned" column="currently_assigned"> </property>
+        <property name="dateTime" column="dateTime"> </property>
+        
+    </class>
+    
     <class name="modules.module_model" table="modules">
         <id name="module" column="module">
             <generator class="assigned"></generator>

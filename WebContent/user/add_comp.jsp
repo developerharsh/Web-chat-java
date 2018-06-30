@@ -4,9 +4,29 @@
 <%@ page import="org.apache.commons.fileupload.*" %>
 <%@ page import="org.apache.commons.fileupload.disk.*" %>
 <%@ page import="org.apache.commons.fileupload.servlet.*" %>
-<%@ page import="org.apache.commons.io.output.*" %>
-<%! String data[]=new String[4]; %>
-<%  DiskFileItemFactory factory = new DiskFileItemFactory();
+<%@ page import="org.apache.commons.io.output.*,java.math.BigDecimal" %>
+<%@page import="java.util.Iterator,java.util.List,org.hibernate.*,org.hibernate.cfg.*,java.util.Date,java.text.SimpleDateFormat,complaint.complaint_model" %>
+<%! String data[]=new String[4]; 
+	Integer createdFileName;
+	String savedFileName="null";%>
+<% 
+
+Configuration cfg=new Configuration();
+cfg.configure("Hibernate.cfg.xml");
+System.out.println("Loaded Configuration .........");
+
+SessionFactory sf=cfg.buildSessionFactory();
+System.out.println("Loaded SessionFactory ..........");
+
+Session s=sf.openSession();
+System.out.println("Loaded Session ..........");
+
+
+
+
+
+
+DiskFileItemFactory factory = new DiskFileItemFactory();
 
 File file ;
 // Set factory constraints
@@ -44,21 +64,80 @@ while (iter.hasNext()) {
     	  }
     	 
       }
+      Query q= s.createSQLQuery("select * from generate");
+      List l = q.list();
+      Iterator it = l.iterator();
+      	 
+      if(it.hasNext())
+      {
+      	Integer st = ((BigDecimal)it.next()).intValue();
+      	createdFileName=st;
+      	q=s.createSQLQuery("update generate set getnumber=getnumber+1 where getnumber=?");
+      	q.setParameter(0, createdFileName);
+      	q.executeUpdate();
+      }
+
+      else{
+    	  createdFileName=000000;
+      }
       String abc= fileName.substring(i, fileName.length());
       out.println(abc);
       boolean isInMemory = fi.isInMemory();
       long sizeInBytes = fi.getSize();
-      file = new File( "G:\\" + "fileName"+abc) ;
+      savedFileName=createdFileName+abc;
+      file = new File( "G:\\" + savedFileName) ;
       fi.write( file ) ;
       out.println("Uploaded Filename: " + fileName + "<br>");
       
       for(i=0;i<data.length;i++){
     	  System.out.println(data[i]);
       }
+      
+      String type="New Requirement";
+      complaint_model p = new complaint_model();
+      	p.setType(type);
+      	p.setAttachments(savedFileName);
+      	SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm:ss");
+          String time = localDateFormat.format(new Date());
+      		//System.out.println(time);
+        System.out.println(java.sql.Date.valueOf(java.time.LocalDate.now())+" "+time);
+      	p.setDateTime(java.sql.Date.valueOf(java.time.LocalDate.now())+" "+time);
+      	p.setModule(data[3]);
+      	p.setPriority(data[2]);
+      	p.setStatus("new");
+      	p.setSubject(data[0]);
+      	p.setType(data[1]);
+      	Integer userid=((BigDecimal)session.getAttribute("userid")).intValue();
+      	p.setUserId(userid);
+      	s.save(p);
+
+      Transaction t = s.beginTransaction();
+      t.commit();
+
+
+      System.out.println("Loaded Transaction .........");
+
+     
+
+      
     }
 }
 
 %>
 
-
+<%
+Query q= s.createSQLQuery("select complaintid from complaint where attachments=?");
+q.setParameter(0, savedFileName);
+List l = q.list();
+Iterator it = l.iterator();
+Integer comp_id=0;
+if(it.hasNext())
+{
+	comp_id = ((BigDecimal)it.next()).intValue();
+	
+}
+System.out.println(comp_id);
+s.close();
+sf.close();
+response.sendRedirect("user_chat.jsp?compId="+comp_id); %>
 

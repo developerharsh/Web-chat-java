@@ -32,8 +32,9 @@
 		 
 	if(it.hasNext())
 	{
-		//String st = (String)it.next();
+		Object st[] = (Object[])it.next();
 	    response.sendRedirect("user_landing.jsp");
+	    session.setAttribute("userid",st[0]);
 	}
 	
 	else{
