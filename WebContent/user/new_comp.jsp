@@ -27,7 +27,7 @@
 <div class="ui main text container segment" style="margin-top: 100px">
     <div class="ui huge header center aligned">New Complaint</div>
 
-    <form class="ui form" method="POST" action="add_comp.jsp">
+    <form class="ui form" method="POST" action="add_comp.jsp" enctype="multipart/form-data">
        
 
   <div class="field">

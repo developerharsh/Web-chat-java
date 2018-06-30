@@ -1,11 +1,12 @@
 package userLogin;
 
+import java.util.List;
+
 public class UserLogin 
 {
 	private Integer userId;
 	private String userName;
 	private String password;
-	
 	
 	public Integer getUserId() {
 		return userId;
