@@ -16,6 +16,7 @@ public class complaint_model
 	private String attachments;
 	private Integer currently_assigned;
 	private String dateTime;
+	
 	public Integer getComplaintId() {
 		return complaintId;
 	}
