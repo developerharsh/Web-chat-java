@@ -36,6 +36,16 @@
         
     </class>
     
+    <class name="handle_user.hand_model" table="handlers">
+        <id name="id" column="id">
+            <generator class="native"></generator>
+        </id>
+        <property name="name" column="name"> </property>
+        <property name="module" column="module"> </property>
+        <property name="password" column="password"> </property>
+        <property name="head" column="head"> </property>
+        
+    </class>
     <class name="modules.module_model" table="modules">
         <id name="module" column="module">
             <generator class="assigned"></generator>

@@ -1,0 +1,14 @@
+.ui.text.container {
+    font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+    max-width: 1000px!important;
+    line-height: 1.5;
+}
+
+.outer{
+	margin-top: 60px;
+	margin-bottom: 20px;
+}
+img {
+    border-style: none;
+    -webkit-max-logical-height: 400px;
+}
