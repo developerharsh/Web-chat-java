@@ -4,7 +4,9 @@
     <%@page import="java.util.Iterator,java.util.List,org.hibernate.*,org.hibernate.cfg.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <% String complaintid=(String)request.getParameter("complaintid");
-	String subject="",attachments="",module="",type="",datetime="",priority="";
+	System.out.println(complaintid);
+	String subject="",attachments="",module="",type="",datetime="",priority="",assi_name="No one";
+	Integer assigned=0;
 %>
 <html>
     <head>
@@ -29,7 +31,7 @@
 	System.out.println("Loaded Session ..........");
 
 	//Integer userid=((BigDecimal)session.getAttribute("userid")).intValue();
-	Query q= s.createSQLQuery("select subject,attachments,module,type,priority,datetime from complaint where complaintid=?");
+	Query q= s.createSQLQuery("select subject,attachments,module,type,priority,datetime,currently_assigned from complaint where complaintid=?");
 	q.setParameter(0, complaintid);
 	List l = q.list();
 	Iterator it = l.iterator();
@@ -41,14 +43,15 @@
 		type=(String)st[3];
 		priority=(String)st[4];
 		datetime=(String)st[5];
+		if(st[6]!=null){
+			assigned=((BigDecimal)st[6]).intValue();
+		}
 	}
+	
+	System.out.println("ok");
 	%>
 	
-	<%	
 	
-	s.close();
-	sf.close();
-%> 
 <div class="outer">
 <div class="ui main text container segment">
 
@@ -85,7 +88,7 @@
         Reject
       </a>
       <a class="item abc" name="completed">
-        Resolved
+       Change Module
       </a>
     </div>
   </div>
@@ -95,15 +98,25 @@
       <div class="assign">
         <div class="ui huge header center aligned">Assign form</div>
 
-        <form class="ui form" method="POST" action="assign.jsp">
-              <div class="field"> 
-                <label>Assign to: </label> 
-                <select id="drop" class="ui selection dropdown"> 
-                    <option value="">Name1</option> 
-                    <option value="1">Name2</option>
-                    <option value="0">Name3</option> 
-                </select> 
-                </div> 
+        <form class="ui form" method="POST" action="assign.jsp?complaintid=<%=complaintid%>">
+            <%  q= s.createSQLQuery("select name,id from handlers where module=?");
+				q.setParameter(0, module);
+            	l = q.list();
+				 it = l.iterator();%>
+
+  				<div class="field">
+     
+  				<select class="ui dropdown" name="name">
+  				<option value="">Select Name</option>
+  				<% while(it.hasNext())
+				{
+					Object[] st = (Object[])it.next();%>
+    				<option value="<%=st[1]%>"><%=st[0]%></option>
+    			<% 
+				System.out.println(st.toString());
+				}%>
+				</select>
+  			</div>
                 <button class="ui button" type="submit">Assign</button>
         </form>
 
@@ -112,21 +125,41 @@
       <div class="reassign" style="display: none;">
 
         <div class="ui huge header center aligned">Reassign form</div>
+        <%  q= s.createSQLQuery("select name from handlers where id=?");
+				q.setParameter(0, assigned);
+            	l = q.list();
+				 it = l.iterator();
+				 if(it.hasNext()){
+					 String st = (String)it.next();
+					 assi_name=st;%>
+				 	 
+				 <% }
+				 %>
+        
 
-        <p><strong>Previously assigned to:</strong> Name</p>
+        <p><strong>Previously assigned to:</strong> <%= assi_name %></p>
 
-        <form class="ui form" method="POST">
-              <div class="field"> 
-                <label>Reassign to: </label> 
-                <select id="drop" class="ui selection dropdown"> 
-                    <option value="">Name1</option> 
-                    <option value="1">Name2</option>
-                    <option value="0">Name3</option> 
-                </select> 
-                </div> 
+        <form class="ui form" method="POST" action="reassign.jsp?complaintid=<%=complaintid%>">
+               <%  q= s.createSQLQuery("select name,id from handlers where module=?");
+				q.setParameter(0, module);
+            	l = q.list();
+				 it = l.iterator();%>
+
+  				<div class="field">
+     			
+  				<select class="ui dropdown" name="name">
+  				<option value="">Reassign to</option>
+  				<% while(it.hasNext())
+				{
+					Object[] st = (Object[])it.next();%>
+    				<option value="<%=st[1]%>"><%=st[0]%></option>
+    			<% 
+				System.out.println(st.toString());
+				}%>
+				</select>
+  			</div>
 
                 <div class="field">
-                  <label>Reason</label>
                   <input type="text" name="reason" placeholder="Reason">
                 </div>
                 <button class="ui button" type="submit">Reassign</button>
@@ -154,6 +187,11 @@
 </div>
 </div>
 </div>
+<%	
+	
+	s.close();
+	sf.close();
+%> 
 <script>
   $('.abc').on("click",function(){
     $('.abc').removeClass("active");
@@ -186,6 +224,7 @@
     }
   });
   $('#drop').dropdown();
+  $('.ui.dropdown').dropdown();
 </script>
 
 

@@ -3,7 +3,7 @@
 <%@ page import="javax.servlet.http.*" %>
 <%@ page import="org.apache.commons.fileupload.*" %>
 <%@ page import="org.apache.commons.fileupload.disk.*" %>
-<%@ page import="org.apache.commons.fileupload.servlet.*" %>
+<%@ page import="org.apache.commons.fileupload.servlet.*,history.hist_model" %>
 <%@ page import="org.apache.commons.io.output.*,java.math.BigDecimal" %>
 <%@page import="java.util.Iterator,java.util.List,org.hibernate.*,org.hibernate.cfg.*,java.util.Date,java.text.SimpleDateFormat,complaint.complaint_model" %>
 <%! String data[]=new String[4]; 
@@ -110,9 +110,10 @@ while (iter.hasNext()) {
       	Integer userid=((BigDecimal)session.getAttribute("userid")).intValue();
       	p.setUserId(userid);
       	s.save(p);
+      	Transaction t = s.beginTransaction();
+      	t.commit();
 
-      Transaction t = s.beginTransaction();
-      t.commit();
+     
 
 
       System.out.println("Loaded Transaction .........");
@@ -136,7 +137,16 @@ if(it.hasNext())
 	comp_id = ((BigDecimal)it.next()).intValue();
 	
 }
+
+hist_model h= new hist_model();
+h.setComplaintId(comp_id);
+h.setDatetime(st);
+h.setStatus("new");
+
+s.save(h);
 System.out.println(comp_id);
+Transaction t = s.beginTransaction();
+t.commit();
 s.close();
 sf.close();
 response.sendRedirect("user_chat.jsp?compId="+comp_id); %>

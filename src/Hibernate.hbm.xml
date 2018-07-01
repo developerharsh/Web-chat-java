@@ -57,4 +57,14 @@
             <generator class="assigned"></generator>
         </id>
     </class>
+    
+    <class name="history.hist_model" table="history">
+        <id name="count" column="count">
+            <generator class="native"></generator>
+        </id>
+        <property name="complaintId" column="complaintid"> </property>
+        <property name="status" column="status"> </property>
+        <property name="datetime" column="datetime"> </property>
+        <property name="comments" column="comments"> </property>
+    </class>
 </hibernate-mapping>
