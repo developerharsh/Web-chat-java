@@ -4,9 +4,12 @@
     <%@page import="java.util.Iterator,java.util.List,org.hibernate.*,org.hibernate.cfg.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-
 <html>
     <head>
+    <% String filter=request.getParameter("filter");
+    	System.out.println(filter);
+    	String query="";
+    %>
         <title> Signup</title>
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
         <link rel="stylesheet" type="text/css" href="landing.css">
@@ -30,10 +33,14 @@
 
 	Session s=sf.openSession();
 	System.out.println("Loaded Session ..........");
-
+	
 	//Integer userid=((BigDecimal)session.getAttribute("userid")).intValue();
-	Query q= s.createSQLQuery("select subject,status,complaintid,datetime from complaint where userid=?");
-	q.setParameter(0, 1);
+	if(filter==null || filter.equals("none")){
+		query="select subject,status,complaintid,datetime from complaint";
+	}else{
+		query="select subject,status,complaintid,datetime from complaint where status='"+filter+"'";	
+	}
+	Query q= s.createSQLQuery(query);
 	List l = q.list();
 	Iterator it = l.iterator();
 	%>
@@ -47,18 +54,25 @@
 
     <div class="abc">
       <div class="ui horizontal text menu">
-        <div class="header item">Sort By</div>
-          <a class="active item">
+        <div class="header item">Filter By</div>
+          
+          <a href="landing.jsp?filter=none" class="active item">
+             None
+          </a>
+          <a href="landing.jsp?filter=new" class="item">
              New
           </a>
-  <a class="item">
+  <a href="landing.jsp?filter=Assigned" class="item">
     Assigned
   </a>
-  <a class="item">
+  <a href="landing.jsp?filter=Reassign" class="item">
     Reassigned
   </a>
-  <a class="item">
+  <a href="landing.jsp?filter=Rejected" class="item">
     Rejected
+  </a>
+  <a href="landing.jsp?filter=Completed" class="item">
+    Completed
   </a>
 </div>
 </div></div>
