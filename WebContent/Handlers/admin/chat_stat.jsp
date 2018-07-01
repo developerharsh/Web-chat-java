@@ -1,3 +1,11 @@
+<%@page import="java.math.BigDecimal"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@page import="java.util.Iterator,java.util.List,org.hibernate.*,org.hibernate.cfg.*" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<% String complaintid=(String)request.getParameter("complaintid");
+	String subject="",attachments="",module="",type="",datetime="",priority="";
+%>
 <html>
     <head>
         <title> Signup</title>
@@ -9,24 +17,61 @@
     </head>
 
     <body>
+    
+     <%  Configuration cfg=new Configuration();
+	cfg.configure("Hibernate.cfg.xml");
+	System.out.println("Loaded Configuration .........");
+
+	SessionFactory sf=cfg.buildSessionFactory();
+	System.out.println("Loaded SessionFactory ..........");
+
+	Session s=sf.openSession();
+	System.out.println("Loaded Session ..........");
+
+	//Integer userid=((BigDecimal)session.getAttribute("userid")).intValue();
+	Query q= s.createSQLQuery("select subject,attachments,module,type,priority,datetime from complaint where complaintid=?");
+	q.setParameter(0, complaintid);
+	List l = q.list();
+	Iterator it = l.iterator();
+	if(it.hasNext()){
+		Object st[]= (Object[])it.next();
+		subject=(String)st[0];
+		attachments=(String)st[1];
+		module=(String)st[2];
+		type=(String)st[3];
+		priority=(String)st[4];
+		datetime=(String)st[5];
+	}
+	%>
+	
+	<%	
+	
+	s.close();
+	sf.close();
+%> 
 <div class="outer">
 <div class="ui main text container segment">
 
   <div class="ui huge header center aligned">Complaint</div>
 
-  <p><strong>Subject:</strong> Problem in login page</p>
-
+  <p><strong style="padding-right: 2%">Subject:</strong><%=subject %></p>
+  <p><strong style="padding-right: 2%">Module:</strong><%=module%></p>
+  <p><strong style="padding-right: 2%">Type:</strong><%=type%></p>
+  <p><strong style="padding-right: 2%">Priority:</strong><%=priority%></p>
+  <p><strong style="padding-right: 2%">Date and time:</strong><%=datetime%></p>
+<%if(attachments.equals("null")){}
+	else{%>
   <div class="item"> 
     <div class="content"> 
       <div class="description"> 
         <p><strong>Attachments:</strong></p> 
       </div> 
     </div>
-    <div class="image"> 
-      <img src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/db1dc115468443.56291729e0e45.png"> 
-    </div> 
+    <a href="download?attachment=<%=attachments%>"><img src="download.jpg"></a>
      
   </div>
+  <% }%>
+  
       <div class="ui grid">
   <div class="four wide column">
     <div class="ui vertical fluid tabular menu">
@@ -50,7 +95,7 @@
       <div class="assign">
         <div class="ui huge header center aligned">Assign form</div>
 
-        <form class="ui form" method="POST">
+        <form class="ui form" method="POST" action="assign.jsp">
               <div class="field"> 
                 <label>Assign to: </label> 
                 <select id="drop" class="ui selection dropdown"> 
