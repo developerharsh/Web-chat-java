@@ -166,9 +166,10 @@
         </form>
 
       </div>
+      
       <div class="reject" style="display: none;">
 
-        <form class="ui form" method="POST">
+        <form class="ui form" method="POST" action="reject.jsp?complaintid=<%=complaintid%>">
           <div class="field">
                   <label>Reason</label>
                   <input type="text" name="reason" placeholder="Reason">
@@ -179,8 +180,26 @@
       </div>
       
       <div class="completed" style="display: none;">
-        <h3 style="color: green">The complaint was resolved.</h3>
-        <img style="-webkit-max-logical-height: 100px;" src="https://images-na.ssl-images-amazon.com/images/I/51zLZbEVSTL._SY355_.jpg">
+      
+      <form class="ui form" method="POST" action="cng_module.jsp?complaintid=<%=complaintid%>">
+            <%  q= s.createSQLQuery("select * from modules");
+				l = q.list();
+			    it = l.iterator();%>
+
+  				<div class="field">
+     
+  				<select class="ui dropdown" name="module">
+  				<option value="">Select Module</option>
+  				<% while(it.hasNext())
+				{
+					Object st = (Object)it.next();%>
+    				<option value="<%=st%>"><%=st%></option>
+    			<% 	}%>
+				</select>
+  			</div>
+                <button class="ui button" type="submit">Change</button>
+        </form>
+      
       </div>
     </div>
   </div>

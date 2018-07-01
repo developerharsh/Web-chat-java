@@ -9,9 +9,7 @@
 </head>
 <body>
 
-<% String st=request.getParameter("name"); 
-   String reason=request.getParameter("reason"); 
-
+<% String st=request.getParameter("module"); 
 String complaintid=(String)request.getParameter("complaintid");
 
 Configuration cfg=new Configuration();
@@ -24,21 +22,22 @@ System.out.println("Loaded SessionFactory ..........");
 Session s=sf.openSession();
 System.out.println("Loaded Session ..........");
 
-Query q= s.createSQLQuery("update complaint set currently_assigned=?,status=?");
+Query q= s.createSQLQuery("update complaint set module=?,status=? where complaintid=?");
 q.setParameter(0, st);
-q.setParameter(1,"Assigned");
+q.setParameter(1,"Modified");
+q.setParameter(2,complaintid);
 q.executeUpdate();
 Transaction t = s.beginTransaction();
 t.commit();
 
 hist_model h = new hist_model();
-h.setComplaintId(Integer.parseInt(complaintid));
-h.setStatus("Assigned");
-SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm:ss");
-String time = localDateFormat.format(new Date());
-h.setDatetime(java.sql.Date.valueOf(java.time.LocalDate.now())+" "+time);
-h.setComments(reason);
-s.save(h);
+ h.setComplaintId(Integer.parseInt(complaintid));
+ h.setStatus("Modified");
+ SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm:ss");
+ String time = localDateFormat.format(new Date());
+ h.setDatetime(java.sql.Date.valueOf(java.time.LocalDate.now())+" "+time);
+ h.setComments("Module changed");
+ s.save(h);
 Transaction ta = s.beginTransaction();
 ta.commit();
 
