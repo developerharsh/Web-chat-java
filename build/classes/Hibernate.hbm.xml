@@ -67,4 +67,17 @@
         <property name="datetime" column="datetime"> </property>
         <property name="comments" column="comments"> </property>
     </class>
+    
+    <class name="message.msg_model" table="messages">
+        <id name="count" column="count">
+            <generator class="native"></generator>
+        </id>
+        <property name="complaintId" column="complaintid"> </property>
+        <property name="userid" column="userid"> </property>
+        <property name="datetime" column="datetime"> </property>
+        <property name="handlerid" column="handlerid"> </property>
+        <property name="attachments" column="attachments"> </property>
+        <property name="text" column="text"> </property>
+        
+    </class>
 </hibernate-mapping>

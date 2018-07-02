@@ -19,23 +19,47 @@
 <div class="ui main text container segment">
     <div class="ui huge header center aligned">Chat</div>
 
+
+    <div class="ui top attached segment">
+        <div class="ui divided items">
+          <div class="recieved" >
+          <p>my first message jdha adahdia jash</p>
+          <a href=""><i class="download icon"></i> download</a>
+          </div>
+
+          <div class="send">
+            <p>my sjdjos sdishd fudhf ejdneu absu ad a dj sfubfjdbfj kdfskf skdjbfsdfs djf</p>
+            <a href=""><i class="download icon"></i> download</a>
+          </div>
+        </div>
+    </div>
+
+
     <form class="ui form" method="POST">
-    
-  
-  <div class="field">
-    <label>Messages</label>
-    <textarea></textarea>
-  </div>
-   
+     
 
   <div class="field">
     <div class="ui action input">
       <input type="text" placeholder="Text...">
-      <button class="ui button">Send</button>
+      <button class="ui button" type="submit">Send</button>
+</div>
+  </div>
+<!-- <button class="positive ui button" type="submit">Close chat</button> -->
+    </form>
+    <form class="ui form" method="POST">
+     
+
+  <div class="field">
+    <div class="ui action input">
+      <input type="file" name="filename">
+      <button class="ui button" type="submit">Send</button>
 </div>
   </div>
 
-  <button class="positive ui button" type="submit">Close chat</button>
+    </form>
+
+    <form class="ui form" method="POST">
+      <button class="positive ui button" type="submit">Satisfied</button>
     </form>
 </div>
 
