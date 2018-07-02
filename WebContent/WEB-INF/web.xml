@@ -10,4 +10,14 @@
   		<servlet-name>F1</servlet-name>
   		<url-pattern>/Handlers/admin/download</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+  		<servlet-name>F2</servlet-name>
+  		<servlet-class>download.Download</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  		<servlet-name>F2</servlet-name>
+  		<url-pattern>/user/download</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -2,8 +2,8 @@ package message;
 
 public class msg_model 
 {
-	private String userid;
-	private String handlerid;
+	private String sender;
+	private String reciever;
 	private String complaintid;
 	private String text;
 	private String attachments;
@@ -15,17 +15,18 @@ public class msg_model
 	public void setCount(Integer count) {
 		this.count = count;
 	}
-	public String getUserid() {
-		return userid;
+	
+	public String getSender() {
+		return sender;
 	}
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setSender(String sender) {
+		this.sender = sender;
 	}
-	public String getHandlerid() {
-		return handlerid;
+	public String getReciever() {
+		return reciever;
 	}
-	public void setHandlerid(String handlerid) {
-		this.handlerid = handlerid;
+	public void setReciever(String reciever) {
+		this.reciever = reciever;
 	}
 	public String getComplaintid() {
 		return complaintid;

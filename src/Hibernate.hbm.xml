@@ -73,9 +73,9 @@
             <generator class="native"></generator>
         </id>
         <property name="complaintid" column="complaintid"> </property>
-        <property name="userid" column="userid"> </property>
+        <property name="sender" column="sender"> </property>
         <property name="datetime" column="datetime"> </property>
-        <property name="handlerid" column="handlerid"> </property>
+        <property name="reciever" column="reciever"> </property>
         <property name="attachments" column="attachments"> </property>
         <property name="text" column="text"> </property>
         

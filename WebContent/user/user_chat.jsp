@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@page import="java.util.Iterator,java.util.List,org.hibernate.*,org.hibernate.cfg.*,java.math.BigDecimal,java.util.Date,java.text.SimpleDateFormat" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <html>
     <head>
         <title> Signup</title>
@@ -7,7 +12,8 @@
     </head>
 
     <body>
-    <% String complaintid=(String)request.getParameter("complaintid"); %>
+    <% String complaintid=(String)request.getParameter("complaintid");
+    Integer userid=((BigDecimal)session.getAttribute("userid")).intValue();%>
         <!-- <div class="ui fixed inverted menu">
             <div class="ui container">
                 <div class="header item"><i class="code icon"></i>Blog Site</div>
@@ -20,20 +26,54 @@
 <div class="ui main text container segment">
     <div class="ui huge header center aligned">Chat</div>
 
+	<%  
 
-    <div class="ui top attached segment">
+Configuration cfg=new Configuration();
+cfg.configure("Hibernate.cfg.xml");
+System.out.println("Loaded Configuration .........");
+
+SessionFactory sf=cfg.buildSessionFactory();
+System.out.println("Loaded SessionFactory ..........");
+
+Session s=sf.openSession();
+System.out.println("Loaded Session ..........");
+
+ Query q= s.createSQLQuery("select sender,attachments,text from messages where complaintid=?");
+ q.setParameter(0,complaintid);
+ List l = q.list();
+Iterator it = l.iterator();%>
+ <div class="ui top attached segment">
         <div class="ui divided items">
-          <div class="recieved" >
-          <p>my first message jdha adahdia jash</p>
-          <a href=""><i class="download icon"></i> download</a>
-          </div>
+<% while(it.hasNext())
+{
+	Object obj[] = (Object[])it.next();
+	if(obj[0].equals(userid))
+	{%>	
+		<div class="recieved" style="max-width: 60%;">
+		<% if(obj[1]==null)
+		{%>
+			<p><%=obj[2] %></p>
+			
+		<%}else{%>
+			<a href="download?attachment=<%=obj[1]%>"><i class="download icon"></i> download</a>
+		<% }%>
+		</div>
+	<%}else{%>
+		<div class="send" style="position: relative;max-width: 60%;left: 45%;">
+		<% if(obj[1]==null)
+		{%>
+			<p><%=obj[2] %></p>
+			
+		<%}else{%>
+			<a href="download?attachment=<%=obj[1]%>"><i class="download icon"></i> download</a>
+			<%} %>
+			</div>
+	<%}%>
 
-          <div class="send">
-            <p>my sjdjos sdishd fudhf ejdneu absu ad a dj sfubfjdbfj kdfskf skdjbfsdfs djf</p>
-            <a href=""><i class="download icon"></i> download</a>
-          </div>
-        </div>
-    </div>
+<%}%>
+</div></div>
+
+    
 
 
     <form class="ui form" method="POST" action="add_msg.jsp?complaintid=<%=complaintid%>">

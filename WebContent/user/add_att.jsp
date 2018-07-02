@@ -38,9 +38,6 @@ System.out.println("Loaded Session ..........");
 
 
 
-
-
-
 DiskFileItemFactory factory = new DiskFileItemFactory();
 
 File file ;
@@ -128,8 +125,8 @@ while (iter.hasNext()) {
    SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm:ss");
    String time = localDateFormat.format(new Date());
    m.setDatetime(java.sql.Date.valueOf(java.time.LocalDate.now())+" "+time);
-   m.setUserid(userid);
-   m.setHandlerid(recieverid);
+   m.setSender(userid);
+   m.setReciever(recieverid);
    s.save(m);
   Transaction ta = s.beginTransaction();
   ta.commit();
@@ -170,7 +167,7 @@ Transaction t = s.beginTransaction();
 t.commit();
 s.close();
 sf.close();
-response.sendRedirect("user_chat.jsp?compId="+comp_id); %>
+response.sendRedirect("user_chat.jsp?complaintid="+complaintid); %>
 
 
 
