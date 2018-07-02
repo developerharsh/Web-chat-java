@@ -12,7 +12,7 @@
     %>
         <title> Signup</title>
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
-        <link rel="stylesheet" type="text/css" href="landing.css">
+        <link rel="stylesheet" type="text/css" href="alanding.css">
             
     </head>
 
@@ -85,9 +85,14 @@
 		Object st[] = (Object[])it.next();%>
 		<div class="ui top attached segment">
         <div class="ui divided items">
-        <%if(st[1].equals("completed")){%>
+        <%if(st[1].equals("Completed")){%>
         	<a href="chat_stat.jsp?complaintid=<%=st[2]%>" class="completed"><strong>Subject: </strong><%= st[0] %></a>
             <i class="check icon completed"></i>
+            <p><strong>Status: </strong><%= st[1] %><strong style="padding-left: 2%">Created on: </strong><%= st[3] %></p>
+        	
+        	<% }else if(st[1].equals("Rejected")){ %>
+        	<a href="chat_stat.jsp?complaintid=<%=st[2]%>" class="rejected"><strong>Subject: </strong><%= st[0] %></a>
+            <i class="unlink icon rejected"></i></i>
             <p><strong>Status: </strong><%= st[1] %><strong style="padding-left: 2%">Created on: </strong><%= st[3] %></p>
         	
         	

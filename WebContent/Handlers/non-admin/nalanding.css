@@ -1,7 +1,6 @@
 .ui.text.container {
     font-size: 1.14285714rem;
     margin-top: 60px;
-    margin-bottom: 20px;
 }
 
 
@@ -12,6 +11,9 @@
 
 .completed{
 	color: green;
+}
+.rejected{
+	color:red;
 }
 
 i.icon, i.icons {
@@ -25,4 +27,11 @@ i.icon, i.icons {
 }
 .top{
 	position: relative;
+}
+#exc{
+    float: none;
+}
+#new{
+    position: relative;
+    left: 46%
 }

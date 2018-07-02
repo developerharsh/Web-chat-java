@@ -33,11 +33,11 @@
 	if(it.hasNext())
 	{
 		Object st[] = (Object[])it.next();
-		session.setAttribute("userid",st[0]);
+		session.setAttribute("id",st[0]);
 		if(st[4].equals("yes")){
 			response.sendRedirect("./admin/landing.jsp");
 		}else{
-	    out.println("not working");
+			response.sendRedirect("./non-admin/landing.jsp");
 		}
 	}
 	

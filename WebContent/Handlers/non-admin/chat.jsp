@@ -7,13 +7,13 @@
     <head>
         <title> Signup</title>
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
-        <link rel="stylesheet" type="text/css" href="user_chat.css">
+        <link rel="stylesheet" type="text/css" href="nachat.css">
 
     </head>
 
     <body>
     <% String complaintid=(String)request.getParameter("complaintid");
-    Integer userid=((BigDecimal)session.getAttribute("userid")).intValue();
+    Integer userid=((BigDecimal)session.getAttribute("id")).intValue();
     String id=userid.toString();%>
         <!-- <div class="ui fixed inverted menu">
             <div class="ui container">
@@ -71,7 +71,8 @@ Iterator it = l.iterator();%>
 			</div>
 	<%}%>
 
-<%}%></div></div>
+<%}%>
+</div></div>
 
     
 
@@ -98,8 +99,8 @@ Iterator it = l.iterator();%>
 
     </form>
 
-    <form class="ui form" method="POST" action="satisfied.jsp?complaintid=<%=complaintid%>">
-      <button class="positive ui button" type="submit">Satisfied</button>
+    <form class="ui form" method="POST" action="reassign.jsp?complaintid=<%=complaintid%>">
+      <button class="positive ui button" type="submit">Reassign</button>
     </form>
 </div>
 
