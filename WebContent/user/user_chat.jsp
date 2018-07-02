@@ -59,13 +59,13 @@ Iterator it = l.iterator();%>
 		<% }%>
 		</div>
 	<%}else{%>
-		<div class="send" style="position: relative;max-width: 60%;left: 45%;">
+		<div class="send" style="position: relative;max-width: 60%;left: 40%;">
 		<% if(obj[1]==null)
 		{%>
-			<p><%=obj[2] %></p>
+			<p align="right"><%=obj[2] %></p>
 			
 		<%}else{%>
-			<a href="download?attachment=<%=obj[1]%>"><i class="download icon"></i> download</a>
+			<a style="position: relative;left:78%" href="download?attachment=<%=obj[1]%>"><i class="download icon"></i> download</a>
 			<%} %>
 			</div>
 	<%}%>
