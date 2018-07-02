@@ -72,7 +72,7 @@
         <id name="count" column="count">
             <generator class="native"></generator>
         </id>
-        <property name="complaintId" column="complaintid"> </property>
+        <property name="complaintid" column="complaintid"> </property>
         <property name="userid" column="userid"> </property>
         <property name="datetime" column="datetime"> </property>
         <property name="handlerid" column="handlerid"> </property>

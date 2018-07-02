@@ -7,6 +7,7 @@
     </head>
 
     <body>
+    <% String complaintid=(String)request.getParameter("complaintid"); %>
         <!-- <div class="ui fixed inverted menu">
             <div class="ui container">
                 <div class="header item"><i class="code icon"></i>Blog Site</div>
@@ -35,30 +36,29 @@
     </div>
 
 
-    <form class="ui form" method="POST">
+    <form class="ui form" method="POST" action="add_msg.jsp?complaintid=<%=complaintid%>">
      
-
   <div class="field">
     <div class="ui action input">
-      <input type="text" placeholder="Text...">
+      <input type="text" placeholder="Text..." name="text">
       <button class="ui button" type="submit">Send</button>
 </div>
   </div>
 <!-- <button class="positive ui button" type="submit">Close chat</button> -->
     </form>
-    <form class="ui form" method="POST">
+    <form class="ui form" method="POST"  enctype="multipart/form-data" action="add_att.jsp?complaintid=<%=complaintid%>">
      
-
   <div class="field">
     <div class="ui action input">
       <input type="file" name="filename">
+      <input style="display:none" type="text" name="demo">
       <button class="ui button" type="submit">Send</button>
 </div>
   </div>
 
     </form>
 
-    <form class="ui form" method="POST">
+    <form class="ui form" method="POST" action="satisfied.jsp?complaintid=<%=complaintid%>">
       <button class="positive ui button" type="submit">Satisfied</button>
     </form>
 </div>

@@ -7,7 +7,7 @@ public class msg_model
 	private String complaintid;
 	private String text;
 	private String attachments;
-	private String timedate;
+	private String datetime;
 	private Integer count;
 	public Integer getCount() {
 		return count;
@@ -45,12 +45,13 @@ public class msg_model
 	public void setAttachments(String attachments) {
 		this.attachments = attachments;
 	}
-	public String getTimedate() {
-		return timedate;
+	public String getDatetime() {
+		return datetime;
 	}
-	public void setTimedate(String timedate) {
-		this.timedate = timedate;
+	public void setDatetime(String datetime) {
+		this.datetime = datetime;
 	}
+	
 
 
 	

@@ -32,9 +32,9 @@
 	Session s=sf.openSession();
 	System.out.println("Loaded Session ..........");
 
-	//Integer userid=((BigDecimal)session.getAttribute("userid")).intValue();
+	Integer userid=((BigDecimal)session.getAttribute("userid")).intValue();
 	Query q= s.createSQLQuery("select subject,status,complaintid,datetime from complaint where userid=?");
-	q.setParameter(0, 1);
+	q.setParameter(0, userid);
 	List l = q.list();
 	Iterator it = l.iterator();
 	%>
@@ -76,7 +76,7 @@
 %>    
     
     <br>
-    <a href="new_comp.jsp" id="new"> New<i class="pencil alternate icon" id="exc"></i></a>
+    <a href="new_comp.jsp" id="new"> New Complaint<i class="pencil alternate icon" id="exc"></i></a>
   
 </div>
 
