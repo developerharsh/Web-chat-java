@@ -17,3 +17,6 @@ p:first-child {
 	max-width: 60%;
 	left: 45%;
 }
+#load{
+	position: absolute;
+}

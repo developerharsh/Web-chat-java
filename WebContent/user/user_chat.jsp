@@ -39,10 +39,26 @@ System.out.println("Loaded SessionFactory ..........");
 Session s=sf.openSession();
 System.out.println("Loaded Session ..........");
 
- Query q= s.createSQLQuery("select sender,attachments,text from messages where complaintid=?");
+
+Query q= s.createSQLQuery("select currently_assigned from complaint where complaintid=?");
+q.setParameter(0,complaintid);
+List l = q.list();
+Iterator it = l.iterator();
+Object ab=null;
+	if(it.hasNext()){
+		ab=(Object)it.next();
+	}
+	
+	if(ab==null){%>
+		<img src="../Resources/loading.gif" style="margin-left: 30%">
+		<p style="padding-left: 14%">Please wait while we assign your complaint to someone </p>
+		<img src="../Resources/loading_dots.gif" style="width:15%;position: absolute;left: 68%;top: 75.7%;">
+	<% }else{
+
+  q= s.createSQLQuery("select sender,attachments,text from messages where complaintid=?");
  q.setParameter(0,complaintid);
- List l = q.list();
-Iterator it = l.iterator();%>
+ l = q.list();
+ it = l.iterator();%>
  <div class="ui top attached segment">
         <div class="ui divided items">
 <% while(it.hasNext())
@@ -73,10 +89,11 @@ Iterator it = l.iterator();%>
 
 <%}%></div></div>
 
+
     
 
 
-    <form class="ui form" method="POST" action="add_msg.jsp?complaintid=<%=complaintid%>">
+    <form style="margin-top: 8px" class="ui form" method="POST" action="add_msg.jsp?complaintid=<%=complaintid%>">
      
   <div class="field">
     <div class="ui action input">
@@ -86,7 +103,7 @@ Iterator it = l.iterator();%>
   </div>
 <!-- <button class="positive ui button" type="submit">Close chat</button> -->
     </form>
-    <form class="ui form" method="POST"  enctype="multipart/form-data" action="add_att.jsp?complaintid=<%=complaintid%>">
+    <form style="margin-top: 4px" class="ui form" method="POST"  enctype="multipart/form-data" action="add_att.jsp?complaintid=<%=complaintid%>">
      
   <div class="field">
     <div class="ui action input">
@@ -98,9 +115,9 @@ Iterator it = l.iterator();%>
 
     </form>
 
-    <form class="ui form" method="POST" action="satisfied.jsp?complaintid=<%=complaintid%>">
+    <form style="margin-top: 10px" class="ui form" method="POST" action="satisfied.jsp?complaintid=<%=complaintid%>">
       <button class="positive ui button" type="submit">Satisfied</button>
-    </form>
+    </form><%} %>
 </div>
 
 
