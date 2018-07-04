@@ -78,6 +78,7 @@
         <property name="reciever" column="reciever"> </property>
         <property name="attachments" column="attachments"> </property>
         <property name="text" column="text"> </property>
+        <property name="sname" column="sname"> </property>
         
     </class>
 </hibernate-mapping>

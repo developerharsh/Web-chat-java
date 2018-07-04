@@ -9,6 +9,13 @@ public class msg_model
 	private String attachments;
 	private String datetime;
 	private Integer count;
+	private String sname;
+	public String getSname() {
+		return sname;
+	}
+	public void setSname(String sname) {
+		this.sname = sname;
+	}
 	public Integer getCount() {
 		return count;
 	}

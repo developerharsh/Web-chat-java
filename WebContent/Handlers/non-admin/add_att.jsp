@@ -21,7 +21,7 @@
 	String savedFileName="null";
 	String st;
 	
-	String userid="",recieverid="";
+	String userid="",recieverid="",name="";
 %>
 
 <% 
@@ -116,6 +116,16 @@ while (iter.hasNext()) {
      	recieverid=((BigDecimal)obj[0]).toPlainString();
      	userid=((BigDecimal)obj[1]).toPlainString();
      }
+     
+     q= s.createSQLQuery("select name from handlers where id=?");
+     q.setParameter(0,userid);
+     l = q.list();
+     it = l.iterator();
+     if(it.hasNext())
+     {
+     	Object obj = (Object)it.next();
+     	name=(String)obj;
+     }
 
       
       msg_model m = new msg_model();
@@ -126,6 +136,7 @@ while (iter.hasNext()) {
    String time = localDateFormat.format(new Date());
    m.setDatetime(java.sql.Date.valueOf(java.time.LocalDate.now())+" "+time);
    m.setSender(userid);
+   m.setSname(name);
    m.setReciever(recieverid);
    s.save(m);
   Transaction ta = s.beginTransaction();
@@ -145,26 +156,7 @@ while (iter.hasNext()) {
 %>
 
 <%
-Query q= s.createSQLQuery("select complaintid from complaint where datetime=?");
-q.setParameter(0, st);
-List l = q.list();
-Iterator it = l.iterator();
-Integer comp_id=0;
-if(it.hasNext())
-{
-	comp_id = ((BigDecimal)it.next()).intValue();
-	
-}
 
-hist_model h= new hist_model();
-h.setComplaintId(comp_id);
-h.setDatetime(st);
-h.setStatus("new");
-
-s.save(h);
-System.out.println(comp_id);
-Transaction t = s.beginTransaction();
-t.commit();
 s.close();
 sf.close();
 response.sendRedirect("chat.jsp?complaintid="+complaintid); %>

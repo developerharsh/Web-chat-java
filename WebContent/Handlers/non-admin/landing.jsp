@@ -6,7 +6,13 @@
 
 <html>
     <head>
-    <% String filter=request.getParameter("filter");
+    <%Object vali=session.getAttribute("id");
+ 	if(vali==null){
+ 		response.sendRedirect("../signin.jsp");
+ 	}
+ 	else{   
+    
+    String filter=request.getParameter("filter");
     	System.out.println(filter);
     	String query="";
     	Integer userid=((BigDecimal)session.getAttribute("id")).intValue();
@@ -25,7 +31,9 @@
                 <a  style="position:absolute;left:90%" href="logout.jsp" class="item">Logout<i style="margin-left: 2px;size:2 em;"class="sign out alternate icon"></i></a>
             </div>
         </div> 
-        <%  Configuration cfg=new Configuration();
+        <% 
+        
+        Configuration cfg=new Configuration();
 	cfg.configure("Hibernate.cfg.xml");
 	System.out.println("Loaded Configuration .........");
 
@@ -112,6 +120,7 @@
 
 	s.close();
 	sf.close();
+     	}
 %>  
 </div>
 

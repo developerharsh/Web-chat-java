@@ -22,7 +22,14 @@
         </div> 
 
 
-<%  Configuration cfg=new Configuration();
+<%  
+	Object vali=session.getAttribute("userid");
+	if(vali==null){
+		response.sendRedirect("user_signin.jsp");
+	}
+	else{
+	
+	Configuration cfg=new Configuration();
 	cfg.configure("Hibernate.cfg.xml");
 	System.out.println("Loaded Configuration .........");
 
@@ -78,6 +85,7 @@
 
 	s.close();
 	sf.close();
+	}
 %>    
     
     <br>

@@ -12,7 +12,15 @@
     </head>
 
     <body>
-    <% String complaintid=(String)request.getParameter("complaintid");
+    
+    <%
+    Object vali=session.getAttribute("userid");
+	if(vali==null){
+		response.sendRedirect("user_signin.jsp");
+	}
+	else{
+    
+    String complaintid=(String)request.getParameter("complaintid");
     Integer userid=((BigDecimal)session.getAttribute("userid")).intValue();
     String id=userid.toString();%>
        <div class="ui fixed inverted menu">
@@ -44,16 +52,13 @@ Query q= s.createSQLQuery("select currently_assigned,subject from complaint wher
 System.out.println(complaintid);
 q.setParameter(0,complaintid);
 List l = q.list();
-System.out.println("hey");
 Iterator it = l.iterator();
 Object ab=null;
-System.out.println("hey1");
 String subject="";
 	if(it.hasNext()){
 		Object st[]=(Object[])it.next();
 		ab=st[0];
 		subject=(String)st[1];
-		System.out.println("hey2");
 	}%>
 	
 	
@@ -65,7 +70,7 @@ String subject="";
 		<img src="../Resources/loading_dots.gif" style="width:15%;position: absolute;left: 68%;top: 77.8%;">
 	<% }else{
 
-  q= s.createSQLQuery("select sender,attachments,text from messages where complaintid=?");
+  q= s.createSQLQuery("select sender,attachments,text,sname from messages where complaintid=?");
  q.setParameter(0,complaintid);
  l = q.list();
  it = l.iterator();%>
@@ -77,21 +82,26 @@ String subject="";
 	if(obj[0].equals(id))
 	{%>	
 		<div style="position: relative;max-width: 60%;left: 40%;">
+		<p align="right" style="margin-bottom: 0px;font-size: 13px;margin-top: 8px;"><i>You</i></p>
 		<% if(obj[1]==null)
-		{%>
+		{%> 
 			<p align="right"><%=obj[2] %></p>
 			
 		<%}else{%>
+		    
 			<a style="position: relative;left:78%" href="download?attachment=<%=obj[1]%>"><i class="download icon"></i> download</a>
 		<% }%>
 		</div>
 	<%}else{%>
 		<div style="max-width: 60%;">
+		<p style="margin-bottom: 0px;font-size: 13px;margin-top: 8px;"><i><%=obj[3] %></i></p>
 		<% if(obj[1]==null)
 		{%>
+			
 			<p><%=obj[2] %></p>
 			
 		<%}else{%>
+		
 			<a href="download?attachment=<%=obj[1]%>"><i class="download icon"></i> download</a>
 			<%} %>
 			</div>
@@ -127,7 +137,7 @@ String subject="";
 
     <form style="margin-top: 10px" class="ui form" method="POST" action="satisfied.jsp?complaintid=<%=complaintid%>">
       <button class="positive ui button" type="submit">Satisfied</button>
-    </form><%} %>
+    </form><%}} %>
 </div>
 
 

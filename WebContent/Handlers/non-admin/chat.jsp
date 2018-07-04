@@ -12,7 +12,14 @@
     </head>
 
     <body>
-    <% String complaintid=(String)request.getParameter("complaintid");
+    <% Object vali=session.getAttribute("id");
+    String complaintid=(String)request.getParameter("complaintid");
+    
+    if(vali==null){
+ 		response.sendRedirect("../signin.jsp");
+ 	}
+ 	else{
+    
     Integer userid=((BigDecimal)session.getAttribute("id")).intValue();
     String id=userid.toString();%>
         <div class="ui fixed inverted menu">
@@ -28,7 +35,7 @@
     <div class="ui huge header center aligned">Chat</div>
 
 	<%  
-
+	 
 Configuration cfg=new Configuration();
 cfg.configure("Hibernate.cfg.xml");
 System.out.println("Loaded Configuration .........");
@@ -83,7 +90,7 @@ String subject="";
 			</div>
 	<%}%>
 
-<%}%>
+<%}}%>
 </div></div>
 
     

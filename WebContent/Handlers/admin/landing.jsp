@@ -24,7 +24,14 @@
                 <a  style="position:absolute;left:90%" href="logout.jsp" class="item">Logout<i style="margin-left: 2px;size:2 em;"class="sign out alternate icon nav"></i></a>
             </div>
         </div> 
-        <%  Configuration cfg=new Configuration();
+        <%  
+        Object vali=session.getAttribute("id");
+    	if(vali==null){
+    		response.sendRedirect("../signin.jsp");
+    	}
+    	else{
+        
+        Configuration cfg=new Configuration();
 	cfg.configure("Hibernate.cfg.xml");
 	System.out.println("Loaded Configuration .........");
 
@@ -111,6 +118,7 @@
 
 	s.close();
 	sf.close();
+    	}
 %>  
 </div>
 

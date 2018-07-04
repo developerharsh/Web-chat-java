@@ -10,18 +10,18 @@
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script>
-            
+        <link rel="stylesheet" type="text/css" href="newcomp.css">
     </head>
 
 
     <body>
-        <!-- <div class="ui fixed inverted menu">
+        <div class="ui fixed inverted menu">
             <div class="ui container">
-                <div class="header item"><i class="code icon"></i>Blog Site</div>
-                <a href="/" class="item">Home</a>
-                <a href="/blogs/new" class="item">New Post</a>
+                <div class="header item"><i class="code icon nav"></i>Complaint Portal</div>
+                <a href="user_landing.jsp" class="item"><i class="home icon nav"></i>Home</a>
+                <a  style="position:absolute;left:90%" href="logout.jsp" class="item">Logout<i style="margin-left: 2px;size:2 em;"class="sign out alternate icon nav"></i></a>
             </div>
-        </div> -->
+        </div> 
 
 
 <div class="ui main text container segment" style="margin-top: 100px">
@@ -36,6 +36,12 @@
   </div>
 
 <%
+
+Object vali=session.getAttribute("userid");
+if(vali==null){
+	response.sendRedirect("user_signin.jsp");
+}
+else{
 Configuration cfg=new Configuration();
 cfg.configure("Hibernate.cfg.xml");
 System.out.println("Loaded Configuration .........");
@@ -104,7 +110,7 @@ Iterator it = l.iterator();%>
 <%
 s.close();
 sf.close();
-%>
+}%>
 <script>
     $('.ui.dropdown')
   .dropdown()

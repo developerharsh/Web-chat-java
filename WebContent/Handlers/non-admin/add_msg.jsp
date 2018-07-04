@@ -12,7 +12,7 @@
 
 <% String st=request.getParameter("text"); 
 String complaintid=(String)request.getParameter("complaintid");
-String userid="",recieverid="";
+String userid="",recieverid="",name="";
 
 Configuration cfg=new Configuration();
 cfg.configure("Hibernate.cfg.xml");
@@ -42,6 +42,16 @@ if(it.hasNext())
 	userid=((BigDecimal)obj[1]).toPlainString();
 }
 
+q= s.createSQLQuery("select name from handlers where id=?");
+q.setParameter(0,userid);
+l = q.list();
+it = l.iterator();
+if(it.hasNext())
+{
+	Object obj = (Object)it.next();
+	name=(String)obj;
+}
+
 msg_model m = new msg_model();
 	m.setComplaintid(complaintid);
 	m.setText(st);
@@ -50,6 +60,7 @@ msg_model m = new msg_model();
  m.setDatetime(java.sql.Date.valueOf(java.time.LocalDate.now())+" "+time);
  m.setSender(userid);
  m.setReciever(recieverid);
+ m.setSname(name);
  s.save(m);
 Transaction ta = s.beginTransaction();
 ta.commit();
