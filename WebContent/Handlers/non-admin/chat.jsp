@@ -69,7 +69,7 @@ String subject="";
  q.setParameter(0,complaintid);
   l = q.list();
  it = l.iterator();%>
- <div class="ui top attached segment">
+ <div class="ui top attached segment" style="margin-top: 0px">
         <div class="ui divided items">
 <% while(it.hasNext())
 {
@@ -101,11 +101,19 @@ String subject="";
 
 <%}}else{
 	response.sendRedirect("landing.jsp");
-}}%>
+}%>
 </div></div>
-
-    
-
+<%    Query q= s.createSQLQuery("select status from complaint where complaintid=?");
+q.setParameter(0,complaintid);
+List l = q.list();
+Iterator it = l.iterator();
+String status="";
+	if(it.hasNext()){
+		Object st=(Object)it.next();
+		status=(String)st;
+	}
+    if(!(status.equals("Completed")||status.equals("Rejected"))){
+	 %>
 
     <form style="margin-top: 8px" class="ui form" method="POST" action="add_msg.jsp?complaintid=<%=complaintid%>">
      
@@ -133,7 +141,11 @@ String subject="";
       <button class="positive ui button" type="submit">Reassign</button>
     </form>
 </div>
+<%}
+    s.close();
+	sf.close();%>
 
 
     </body>
+    <%} %>
     </html>
