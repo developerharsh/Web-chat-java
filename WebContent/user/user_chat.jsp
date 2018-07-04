@@ -7,7 +7,7 @@
     <head>
         <title> Signup</title>
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
-        <link rel="stylesheet" type="text/css" href="user_chat.css">
+        <link rel="stylesheet" type="text/css" href="usr_chat.css">
 
     </head>
 
@@ -15,13 +15,13 @@
     <% String complaintid=(String)request.getParameter("complaintid");
     Integer userid=((BigDecimal)session.getAttribute("userid")).intValue();
     String id=userid.toString();%>
-        <!-- <div class="ui fixed inverted menu">
+       <div class="ui fixed inverted menu">
             <div class="ui container">
-                <div class="header item"><i class="code icon"></i>Blog Site</div>
-                <a href="/" class="item">Home</a>
-                <a href="/blogs/new" class="item">New Post</a>
+                <div class="header item"><i class="code icon nav"></i>Complaint Portal</div>
+                <a href="user_landing.jsp" class="item"><i class="home icon nav"></i>Home</a>
+                <a  style="position:absolute;left:90%" href="logout.jsp" class="item">Logout<i style="margin-left: 2px;size:2 em;"class="sign out alternate icon nav"></i></a>
             </div>
-        </div> -->
+        </div> 
 
 
 <div class="ui main text container segment">
@@ -40,19 +40,29 @@ Session s=sf.openSession();
 System.out.println("Loaded Session ..........");
 
 
-Query q= s.createSQLQuery("select currently_assigned from complaint where complaintid=?");
+Query q= s.createSQLQuery("select currently_assigned,subject from complaint where complaintid=?");
+System.out.println(complaintid);
 q.setParameter(0,complaintid);
 List l = q.list();
+System.out.println("hey");
 Iterator it = l.iterator();
 Object ab=null;
+System.out.println("hey1");
+String subject="";
 	if(it.hasNext()){
-		ab=(Object)it.next();
-	}
+		Object st[]=(Object[])it.next();
+		ab=st[0];
+		subject=(String)st[1];
+		System.out.println("hey2");
+	}%>
 	
-	if(ab==null){%>
+	
+	<p><strong>Subject:</strong><%=subject %></p>
+	
+	<% if(ab==null){%>
 		<img src="../Resources/loading.gif" style="margin-left: 30%">
 		<p style="padding-left: 14%">Please wait while we assign your complaint to someone </p>
-		<img src="../Resources/loading_dots.gif" style="width:15%;position: absolute;left: 68%;top: 75.7%;">
+		<img src="../Resources/loading_dots.gif" style="width:15%;position: absolute;left: 68%;top: 77.8%;">
 	<% }else{
 
   q= s.createSQLQuery("select sender,attachments,text from messages where complaintid=?");

@@ -15,13 +15,13 @@
     <% String complaintid=(String)request.getParameter("complaintid");
     Integer userid=((BigDecimal)session.getAttribute("id")).intValue();
     String id=userid.toString();%>
-        <!-- <div class="ui fixed inverted menu">
+        <div class="ui fixed inverted menu">
             <div class="ui container">
-                <div class="header item"><i class="code icon"></i>Blog Site</div>
-                <a href="/" class="item">Home</a>
-                <a href="/blogs/new" class="item">New Post</a>
+                <div class="header item"><i class="code icon nav"></i>Complaint Portal</div>
+                <a href="landing.jsp" class="item"><i class="home icon nav"></i>Home</a>
+                <a  style="position:absolute;left:90%" href="logout.jsp" class="item">Logout<i style="margin-left: 2px;size:2 em;"class="sign out alternate icon nav"></i></a>
             </div>
-        </div> -->
+        </div> 
 
 
 <div class="ui main text container segment">
@@ -39,10 +39,22 @@ System.out.println("Loaded SessionFactory ..........");
 Session s=sf.openSession();
 System.out.println("Loaded Session ..........");
 
- Query q= s.createSQLQuery("select sender,attachments,text from messages where complaintid=?");
+Query q= s.createSQLQuery("select subject from complaint where complaintid=?");
+q.setParameter(0,complaintid);
+List l = q.list();
+Iterator it = l.iterator();
+String subject="";
+	if(it.hasNext()){
+		Object st=(Object)it.next();
+		subject=(String)st;
+	}%>
+	
+	<p><strong>Subject:</strong><%=subject %></p>
+
+ <%  q= s.createSQLQuery("select sender,attachments,text from messages where complaintid=?");
  q.setParameter(0,complaintid);
- List l = q.list();
-Iterator it = l.iterator();%>
+  l = q.list();
+ it = l.iterator();%>
  <div class="ui top attached segment">
         <div class="ui divided items">
 <% while(it.hasNext())
@@ -77,7 +89,7 @@ Iterator it = l.iterator();%>
     
 
 
-    <form class="ui form" method="POST" action="add_msg.jsp?complaintid=<%=complaintid%>">
+    <form style="margin-top: 8px" class="ui form" method="POST" action="add_msg.jsp?complaintid=<%=complaintid%>">
      
   <div class="field">
     <div class="ui action input">
@@ -87,7 +99,7 @@ Iterator it = l.iterator();%>
   </div>
 <!-- <button class="positive ui button" type="submit">Close chat</button> -->
     </form>
-    <form class="ui form" method="POST"  enctype="multipart/form-data" action="add_att.jsp?complaintid=<%=complaintid%>">
+    <form style="margin-top: 4px" class="ui form" method="POST"  enctype="multipart/form-data" action="add_att.jsp?complaintid=<%=complaintid%>">
      
   <div class="field">
     <div class="ui action input">
@@ -99,7 +111,7 @@ Iterator it = l.iterator();%>
 
     </form>
 
-    <form class="ui form" method="POST" action="reassign.jsp?complaintid=<%=complaintid%>">
+    <form style="margin-top: 10px" class="ui form" method="POST" action="reassign.jsp?complaintid=<%=complaintid%>">
       <button class="positive ui button" type="submit">Reassign</button>
     </form>
 </div>

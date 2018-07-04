@@ -149,5 +149,5 @@ Transaction t = s.beginTransaction();
 t.commit();
 s.close();
 sf.close();
-response.sendRedirect("user_chat.jsp?compId="+comp_id); %>
+response.sendRedirect("user_chat.jsp?complaintid="+comp_id); %>
 

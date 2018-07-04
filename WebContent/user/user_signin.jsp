@@ -7,21 +7,22 @@
     	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <title> Signin</title>
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
-        <link rel="stylesheet" type="text/css" href="signup.css">
+        <link rel="stylesheet" type="text/css" href="signin.css">
     </head>
 
     <body>
-        <!-- <div class="ui fixed inverted menu">
+         <div class="ui fixed inverted menu">
             <div class="ui container">
-                <div class="header item"><i class="code icon"></i>Blog Site</div>
-                <a href="/" class="item">Home</a>
-                <a href="/blogs/new" class="item">New Post</a>
+                <div class="header item"><i class="code icon"></i>Complaint Portal</div>
+                <a href="user_landing.jsp" class="item"><i class="home icon"></i>Home</a>
+                <a  style="position:absolute;left:90%" href="logout.jsp" class="item">Logout<i style="margin-left: 2px;size:2 em;"class="sign out alternate icon"></i></a>
             </div>
-        </div> -->
+        </div> 
+        
 
 
 <div class="ui main text container segment">
-    <div class="ui huge header center aligned"><a href="Signup.html">Sign-up</a>/Sign-in</div>
+    <div class="ui huge header center aligned">Sign-in/<a href="Signup.html">Sign-up</a></div>
 
     <form class="ui form" method="POST" action="validate.jsp">
         <div class="field">

@@ -1,7 +1,11 @@
 .ui.text.container {
-    font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
-    max-width: 1000px!important;
-    line-height: 1.5;
+    font-size: 1.14285714rem;
+    margin-top: 60px;
+}
+
+i.icon.nav {
+    font-size: 1.7em;
+    float: right;
 }
 
 .outer{

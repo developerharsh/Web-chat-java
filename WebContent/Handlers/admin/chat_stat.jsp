@@ -19,6 +19,13 @@
     </head>
 
     <body>
+    	 <div class="ui fixed inverted menu">
+            <div class="ui container">
+                <div class="header item"><i class="code icon nav"></i>Complaint Portal</div>
+                <a href="landing.jsp" class="item"><i class="home icon nav"></i>Home</a>
+                <a  style="position:absolute;left:90%" href="logout.jsp" class="item">Logout<i style="margin-left: 2px;size:2 em;"class="sign out alternate icon nav"></i></a>
+            </div>
+        </div> 
     
      <%  Configuration cfg=new Configuration();
 	cfg.configure("Hibernate.cfg.xml");
