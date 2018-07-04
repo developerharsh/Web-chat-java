@@ -46,6 +46,13 @@ System.out.println("Loaded SessionFactory ..........");
 Session s=sf.openSession();
 System.out.println("Loaded Session ..........");
 
+Query q1= s.createSQLQuery("select * from complaint where complaintid=? and currently_assigned=?");
+q1.setParameter(0,complaintid);
+q1.setParameter(1, id);
+List l1 = q1.list();
+Iterator it1 = l1.iterator();
+	if(it1.hasNext()){
+
 Query q= s.createSQLQuery("select subject from complaint where complaintid=?");
 q.setParameter(0,complaintid);
 List l = q.list();
@@ -92,7 +99,9 @@ String subject="";
 			</div>
 	<%}%>
 
-<%}}%>
+<%}}else{
+	response.sendRedirect("landing.jsp");
+}}%>
 </div></div>
 
     

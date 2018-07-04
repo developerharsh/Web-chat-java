@@ -15,12 +15,12 @@
     
     <%
     Object vali=session.getAttribute("userid");
-	if(vali==null){
+    String complaintid=(String)request.getParameter("complaintid");
+    if(vali==null){
 		response.sendRedirect("user_signin.jsp");
 	}
 	else{
     
-    String complaintid=(String)request.getParameter("complaintid");
     Integer userid=((BigDecimal)session.getAttribute("userid")).intValue();
     String id=userid.toString();%>
        <div class="ui fixed inverted menu">
@@ -47,8 +47,15 @@ System.out.println("Loaded SessionFactory ..........");
 Session s=sf.openSession();
 System.out.println("Loaded Session ..........");
 
+Query q1= s.createSQLQuery("select * from complaint where complaintid=? and userid=?");
+q1.setParameter(0,complaintid);
+q1.setParameter(1, id);
+List l1 = q1.list();
+Iterator it1 = l1.iterator();
+	if(it1.hasNext()){
+		
 
-Query q= s.createSQLQuery("select currently_assigned,subject from complaint where complaintid=?");
+ Query q= s.createSQLQuery("select currently_assigned,subject from complaint where complaintid=?");
 System.out.println(complaintid);
 q.setParameter(0,complaintid);
 List l = q.list();
@@ -137,7 +144,13 @@ String subject="";
 
     <form style="margin-top: 10px" class="ui form" method="POST" action="satisfied.jsp?complaintid=<%=complaintid%>">
       <button class="positive ui button" type="submit">Satisfied</button>
-    </form><%}} %>
+    </form><%}}
+	else{
+		response.sendRedirect("user_landing.jsp");
+	}
+	s.close();
+	sf.close();
+	} %>
 </div>
 
 

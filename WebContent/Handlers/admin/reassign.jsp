@@ -24,9 +24,10 @@ System.out.println("Loaded SessionFactory ..........");
 Session s=sf.openSession();
 System.out.println("Loaded Session ..........");
 
-Query q= s.createSQLQuery("update complaint set currently_assigned=?,status=?");
+Query q= s.createSQLQuery("update complaint set currently_assigned=?,status=? where complaintid=?");
 q.setParameter(0, st);
 q.setParameter(1,"Assigned");
+q.setParameter(2, complaintid);
 q.executeUpdate();
 Transaction t = s.beginTransaction();
 t.commit();
@@ -43,6 +44,9 @@ Transaction ta = s.beginTransaction();
 ta.commit();
 
 response.sendRedirect("chat_stat.jsp?complaintid="+complaintid);
+
+s.close();
+sf.close();
 
 %>
 

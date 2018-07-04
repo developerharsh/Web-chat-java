@@ -142,6 +142,7 @@ hist_model h= new hist_model();
 h.setComplaintId(comp_id);
 h.setDatetime(st);
 h.setStatus("new");
+h.setComments("Complaint introduced");
 
 s.save(h);
 System.out.println(comp_id);

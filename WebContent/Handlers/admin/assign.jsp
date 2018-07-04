@@ -10,6 +10,7 @@
 <body>
 <% String st=request.getParameter("name"); 
 String complaintid=(String)request.getParameter("complaintid");
+String hname="";
 
 Configuration cfg=new Configuration();
 cfg.configure("Hibernate.cfg.xml");
@@ -29,12 +30,23 @@ q.executeUpdate();
 Transaction t = s.beginTransaction();
 t.commit();
 
+q= s.createSQLQuery("select name from handlers where id=?");
+q.setParameter(0, st);
+List l=q.list();
+Iterator it=l.iterator();
+
+if(it.hasNext()){
+	Object obj=(Object)it.next();
+	hname=(String)obj;
+}
+
 hist_model h = new hist_model();
  h.setComplaintId(Integer.parseInt(complaintid));
  h.setStatus("Assigned");
  SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm:ss");
  String time = localDateFormat.format(new Date());
  h.setDatetime(java.sql.Date.valueOf(java.time.LocalDate.now())+" "+time);
+ h.setComments("Complaint assigned to: "+hname);
  s.save(h);
 Transaction ta = s.beginTransaction();
 ta.commit();
