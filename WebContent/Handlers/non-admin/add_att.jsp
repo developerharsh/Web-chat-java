@@ -97,9 +97,9 @@ while (iter.hasNext()) {
       fi.write( file ) ;
       out.println("Uploaded Filename: " + fileName + "<br>");
       
-      }
       
-      Query q= s.createSQLQuery("update complaint set status=? where complaintid=?");
+      
+       q= s.createSQLQuery("update complaint set status=? where complaintid=?");
       q.setParameter(0,"Required");
       q.setParameter(1,complaintid);
       q.executeUpdate();
@@ -108,8 +108,8 @@ while (iter.hasNext()) {
       
       q= s.createSQLQuery("select userid,currently_assigned from complaint where complaintid=?");
       q.setParameter(0,complaintid);
-      List l = q.list();
-     Iterator it = l.iterator();
+      l = q.list();
+      it = l.iterator();
      if(it.hasNext())
      {
      	Object obj[] = (Object[])it.next();
@@ -152,7 +152,7 @@ while (iter.hasNext()) {
       
     }
 }
-
+}
 %>
 
 <%

@@ -58,7 +58,7 @@ String subject="";
 	
 	<p><strong>Subject:</strong><%=subject %></p>
 
- <%  q= s.createSQLQuery("select sender,attachments,text from messages where complaintid=?");
+ <%  q= s.createSQLQuery("select sender,attachments,text,sname from messages where complaintid=?");
  q.setParameter(0,complaintid);
   l = q.list();
  it = l.iterator();%>
@@ -70,6 +70,7 @@ String subject="";
 	if(obj[0].equals(id))
 	{%>	
 		<div style="position: relative;max-width: 60%;left: 40%;">
+		<p align="right" style="margin-bottom: 0px;font-size: 13px;margin-top: 8px;color: yellowgreen;"><i>You</i></p>
 		<% if(obj[1]==null)
 		{%>
 			<p align="right"><%=obj[2] %></p>
@@ -80,6 +81,7 @@ String subject="";
 		</div>
 	<%}else{%>
 		<div style="max-width: 60%;">
+		<p style="margin-bottom: 0px;font-size: 13px;margin-top: 8px;color: peru;"><i><%=obj[3] %></i></p>
 		<% if(obj[1]==null)
 		{%>
 			<p><%=obj[2] %></p>

@@ -14,6 +14,8 @@
 String complaintid=(String)request.getParameter("complaintid");
 String userid="",recieverid="",name="";
 
+if(!st.equals("")){
+
 Configuration cfg=new Configuration();
 cfg.configure("Hibernate.cfg.xml");
 System.out.println("Loaded Configuration .........");
@@ -65,6 +67,11 @@ msg_model m = new msg_model();
 Transaction ta = s.beginTransaction();
 ta.commit();
 
+s.close();
+sf.close();
+
+
+}
 response.sendRedirect("user_chat.jsp?complaintid="+complaintid);
 
 %>
