@@ -9,7 +9,8 @@
 <%! String data[]=new String[4]; 
 	Integer createdFileName;
 	String savedFileName="null";
-	String st;%>
+	String st;
+	Integer comp_id=0;%>
 <% 
 
 Configuration cfg=new Configuration();
@@ -94,7 +95,23 @@ while (iter.hasNext()) {
       }
       
       complaint_model p = new complaint_model();
-      	
+      Transaction ta1 = s.beginTransaction();
+      
+
+      
+      Query q= s.createSQLQuery("select * from generate");
+      List l = q.list();
+      Iterator it = l.iterator();
+      
+      if(it.hasNext())
+      {
+      	Integer st = ((BigDecimal)it.next()).intValue();
+      	comp_id=st;
+      	q=s.createSQLQuery("update generate set getnumber=getnumber+1 where getnumber=?");
+      	q.setParameter(0, comp_id);
+      	q.executeUpdate();
+      }
+      ta1.commit();	
       	p.setAttachments(savedFileName);
       	SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm:ss");
           String time = localDateFormat.format(new Date());
@@ -107,6 +124,7 @@ while (iter.hasNext()) {
       	p.setStatus("new");
       	p.setSubject(data[0]);
       	p.setType(data[1]);
+      	p.setComplaintId(comp_id);
       	Integer userid=((BigDecimal)session.getAttribute("userid")).intValue();
       	p.setUserId(userid);
       	s.save(p);
@@ -127,7 +145,7 @@ while (iter.hasNext()) {
 %>
 
 <%
-Query q= s.createSQLQuery("select complaintid from complaint where datetime=?");
+/*Query q= s.createSQLQuery("select complaintid from complaint where datetime=?");
 q.setParameter(0, st);
 List l = q.list();
 Iterator it = l.iterator();
@@ -136,7 +154,7 @@ if(it.hasNext())
 {
 	comp_id = ((BigDecimal)it.next()).intValue();
 	
-}
+}*/
 
 hist_model h= new hist_model();
 h.setComplaintId(comp_id);

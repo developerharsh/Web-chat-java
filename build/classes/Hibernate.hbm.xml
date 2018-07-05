@@ -8,7 +8,7 @@
     
     <class name="userLogin.UserLogin" table="userlogin">
         <id name="userId" column="userid">
-            <generator class="native"></generator>
+            <generator class="assigned"></generator>
         </id>
         <property name="userName" column="username"> </property>
         <property name="password" column="password"> </property>
@@ -22,7 +22,7 @@
     
     <class name="complaint.complaint_model" table="complaint">
         <id name="complaintId" column="complaintId">
-            <generator class="native"></generator>
+            <generator class="assigned"></generator>
         </id>
         <property name="userId" column="userId"> </property>
         <property name="subject" column="subject"> </property>
