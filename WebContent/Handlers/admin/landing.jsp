@@ -10,7 +10,7 @@
     	System.out.println(filter);
     	String query="";
     %>
-        <title> Signup</title>
+        <title>Landing page</title>
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
         <link rel="stylesheet" type="text/css" href="alanding.css">
             
@@ -66,7 +66,7 @@
           <a href="landing.jsp?filter=none" class="active item">
              None
           </a>
-          <a href="landing.jsp?filter=new" class="item">
+          <a href="landing.jsp?filter=New" class="item">
              New
           </a>
   <a href="landing.jsp?filter=Assigned" class="item">

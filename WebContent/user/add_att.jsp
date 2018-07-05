@@ -93,7 +93,7 @@ while (iter.hasNext()) {
       boolean isInMemory = fi.isInMemory();
       long sizeInBytes = fi.getSize();
       savedFileName=createdFileName+abc;
-      file = new File( "G:\\" + savedFileName) ;
+      file = new File( "G://" + savedFileName) ;
       fi.write( file ) ;
       out.println("Uploaded Filename: " + fileName + "<br>");
       

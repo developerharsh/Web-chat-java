@@ -121,7 +121,7 @@ while (iter.hasNext()) {
       	st=java.sql.Date.valueOf(java.time.LocalDate.now())+" "+time;
       	p.setModule(data[3]);
       	p.setPriority(data[2]);
-      	p.setStatus("new");
+      	p.setStatus("New");
       	p.setSubject(data[0]);
       	p.setType(data[1]);
       	p.setComplaintId(comp_id);

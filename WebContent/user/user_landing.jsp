@@ -6,7 +6,7 @@
 <html>
 
     <head>
-        <title> Signup</title>
+        <title>Landing page</title>
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
         <link rel="stylesheet" type="text/css" href="usr_landing.css">
             
