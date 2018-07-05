@@ -32,6 +32,7 @@ t.commit();
 hist_model h = new hist_model();
 h.setComplaintId(Integer.parseInt(complaintid));
 h.setStatus("Completed");
+h.setComments("You closed the chat");
 SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm:ss");
 String time = localDateFormat.format(new Date());
 h.setDatetime(java.sql.Date.valueOf(java.time.LocalDate.now())+" "+time);

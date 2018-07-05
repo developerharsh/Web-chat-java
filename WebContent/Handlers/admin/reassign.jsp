@@ -32,13 +32,22 @@ q.executeUpdate();
 Transaction t = s.beginTransaction();
 t.commit();
 
+q= s.createSQLQuery("select name from handlers where id=?");
+q.setParameter(0, st);
+List l=q.list();
+Iterator it=l.iterator();
+String name="";
+if(it.hasNext()){
+	name=(String)it.next();
+}
+String comment="Assigned to:"+name+", Reason:"+reason;
 hist_model h = new hist_model();
 h.setComplaintId(Integer.parseInt(complaintid));
 h.setStatus("Assigned");
 SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm:ss");
 String time = localDateFormat.format(new Date());
 h.setDatetime(java.sql.Date.valueOf(java.time.LocalDate.now())+" "+time);
-h.setComments(reason);
+h.setComments(comment);
 s.save(h);
 Transaction ta = s.beginTransaction();
 ta.commit();

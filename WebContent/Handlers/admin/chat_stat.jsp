@@ -69,7 +69,8 @@
 
   <div class="ui huge header center aligned">Complaint</div>
 
-  <p><strong style="padding-right: 2%">Subject:</strong><%=subject %></p>
+  <p><strong style="padding-right: 2%">Subject:</strong><%=subject %>
+  <a href="history.jsp?complaintid=<%=complaintid %>" class="positive ui button" style="float:right;" >Synopsis</a></p>
   <p><strong style="padding-right: 2%">Module:</strong><%=module%></p>
   <p><strong style="padding-right: 2%">Type:</strong><%=type%></p>
   <p><strong style="padding-right: 2%">Priority:</strong><%=priority%></p>

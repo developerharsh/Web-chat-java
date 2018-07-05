@@ -63,7 +63,8 @@ String subject="";
 		subject=(String)st;
 	}%>
 	
-	<p><strong>Subject:</strong><%=subject %></p>
+	<p><strong>Subject:</strong><%=subject %>
+	<a href="history.jsp?complaintid=<%=complaintid %>" class="positive ui button" style="float:right;" >Synopsis</a></p>
 
  <%  q= s.createSQLQuery("select sender,attachments,text,sname from messages where complaintid=?");
  q.setParameter(0,complaintid);

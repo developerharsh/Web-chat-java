@@ -69,8 +69,10 @@ String subject="";
 	}%>
 	
 	
-	<p><strong>Subject:</strong><%=subject %></p>
+	<p><strong>Subject:</strong><%=subject %> 
+	<a href="history.jsp?complaintid=<%=complaintid %>" class="positive ui button" style="float:right;" >Synopsis</a></p>
 	
+      
 	<% if(ab==null){%>
 		<img src="../Resources/loading.gif" style="margin-left: 30%">
 		<p style="padding-left: 14%">Please wait while we assign your complaint to someone </p>
