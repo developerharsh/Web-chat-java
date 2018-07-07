@@ -31,8 +31,14 @@
        
 
   <div class="field">
-    <label>Subject</label>
+    
     <input type="text" name="subject" placeholder="Subject goes here ...">
+  </div>
+  
+  <div class="field">
+    
+    <input type="text" name="desc" placeholder="Description...">
+    
   </div>
 
 <%

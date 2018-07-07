@@ -5,7 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <% String complaintid=(String)request.getParameter("complaintid");
 	System.out.println(complaintid);
-	String subject="",attachments="",module="",type="",datetime="",priority="",assi_name="No one";
+	String subject="",attachments="",module="",type="",datetime="",priority="",assi_name="No one",desc="";
 	Integer assigned=0;
 %>
 <html>
@@ -44,7 +44,7 @@
 	System.out.println("Loaded Session ..........");
 
 	//Integer userid=((BigDecimal)session.getAttribute("userid")).intValue();
-	Query q= s.createSQLQuery("select subject,attachments,module,type,priority,datetime,currently_assigned from complaint where complaintid=?");
+	Query q= s.createSQLQuery("select subject,attachments,module,type,priority,datetime,currently_assigned,description from complaint where complaintid=?");
 	q.setParameter(0, complaintid);
 	List l = q.list();
 	Iterator it = l.iterator();
@@ -56,6 +56,7 @@
 		type=(String)st[3];
 		priority=(String)st[4];
 		datetime=(String)st[5];
+		desc=(String)st[7];
 		if(st[6]!=null){
 			assigned=((BigDecimal)st[6]).intValue();
 		}
@@ -70,11 +71,13 @@
   <div class="ui huge header center aligned">Complaint</div>
 
   <p><strong style="padding-right: 2%">Subject:</strong><%=subject %>
+  <p><strong style="padding-right: 2%">Description:</strong><%=desc%></p>
   <a href="history.jsp?complaintid=<%=complaintid %>" class="positive ui button" style="float:right;" >Synopsis</a></p>
   <p><strong style="padding-right: 2%">Module:</strong><%=module%></p>
   <p><strong style="padding-right: 2%">Type:</strong><%=type%></p>
   <p><strong style="padding-right: 2%">Priority:</strong><%=priority%></p>
   <p><strong style="padding-right: 2%">Date and time:</strong><%=datetime%></p>
+  
 <%if(attachments.equals("null")){}
 	else{%>
   <div class="item"> 
@@ -172,9 +175,6 @@
 				</select>
   			</div>
 
-                <div class="field">
-                  <input type="text" name="reason" placeholder="Reason">
-                </div>
                 <button class="ui button" type="submit">Reassign</button>
         </form>
 

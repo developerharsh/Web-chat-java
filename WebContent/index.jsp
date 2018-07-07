@@ -9,8 +9,9 @@
 </head>
 <body>
 	<a href="./user/new_comp.jsp">click</a>
-	<%=
-	getServletContext().getRealPath("/WebContent/Resources")
+	<%String path = request.getParameter("path");
+	System.out.println(path);
+	
 	 %>
 </body>
 </html>

@@ -55,22 +55,25 @@ Iterator it1 = l1.iterator();
 	if(it1.hasNext()){
 		
 
- Query q= s.createSQLQuery("select currently_assigned,subject from complaint where complaintid=?");
+ Query q= s.createSQLQuery("select currently_assigned,subject,description from complaint where complaintid=?");
 System.out.println(complaintid);
 q.setParameter(0,complaintid);
 List l = q.list();
 Iterator it = l.iterator();
 Object ab=null;
 String subject="";
+String desc="";
 	if(it.hasNext()){
 		Object st[]=(Object[])it.next();
 		ab=st[0];
 		subject=(String)st[1];
+		desc=(String)st[2];
 	}%>
 	
 	
 	<p><strong>Subject:</strong><%=subject %> 
 	<a href="history.jsp?complaintid=<%=complaintid %>" class="positive ui button" style="float:right;" >Synopsis</a></p>
+	<p><strong>Description:</strong><%=desc%></p>
 	
       
 	<% if(ab==null){%>
@@ -141,7 +144,7 @@ String status="";
   </div>
 <!-- <button class="positive ui button" type="submit">Close chat</button> -->
     </form>
-    <form style="margin-top: 4px" class="ui form" method="POST"  enctype="multipart/form-data" action="add_att.jsp?complaintid=<%=complaintid%>">
+    <form style="margin-top: 4px" class="ui form" method="POST"  enctype="multipart/form-data" action="add_att1.jsp?complaintid=<%=complaintid%>">
      
   <div class="field">
     <div class="ui action input">

@@ -1,12 +1,14 @@
 package message;
 
+import java.sql.Blob;
+
 public class msg_model 
 {
 	private String sender;
 	private String reciever;
 	private String complaintid;
 	private String text;
-	private String attachments;
+	private byte[] attachments;
 	private String datetime;
 	private Integer count;
 	private String sname;
@@ -47,10 +49,12 @@ public class msg_model
 	public void setText(String text) {
 		this.text = text;
 	}
-	public String getAttachments() {
+	
+	
+	public byte[] getAttachments() {
 		return attachments;
 	}
-	public void setAttachments(String attachments) {
+	public void setAttachments(byte[] attachments) {
 		this.attachments = attachments;
 	}
 	public String getDatetime() {

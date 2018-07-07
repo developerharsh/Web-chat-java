@@ -16,7 +16,15 @@ public class complaint_model
 	private String attachments;
 	private Integer currently_assigned;
 	private String dateTime;
+	private String description;
 	
+	
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	public Integer getComplaintId() {
 		return complaintId;
 	}

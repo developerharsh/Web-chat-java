@@ -6,7 +6,7 @@
 <%@ page import="org.apache.commons.fileupload.servlet.*,history.hist_model" %>
 <%@ page import="org.apache.commons.io.output.*,java.math.BigDecimal" %>
 <%@page import="java.util.Iterator,java.util.List,org.hibernate.*,org.hibernate.cfg.*,java.util.Date,java.text.SimpleDateFormat,complaint.complaint_model" %>
-<%! String data[]=new String[4]; 
+<%! String data[]=new String[5]; 
 	Integer createdFileName;
 	String savedFileName="null";
 	String st;
@@ -52,7 +52,7 @@ while (iter.hasNext()) {
     if (fi.isFormField()) {
     	String value = fi.getString();
     	data[j]=value;j++;%>
-    	<%= value %>
+    	<% System.out.println(value); %>
     	
   <%  } else {
 	  String fieldName = fi.getFieldName();
@@ -119,11 +119,12 @@ while (iter.hasNext()) {
         System.out.println(java.sql.Date.valueOf(java.time.LocalDate.now())+" "+time);
       	p.setDateTime(java.sql.Date.valueOf(java.time.LocalDate.now())+" "+time);
       	st=java.sql.Date.valueOf(java.time.LocalDate.now())+" "+time;
-      	p.setModule(data[3]);
-      	p.setPriority(data[2]);
+      	p.setModule(data[4]);
+      	p.setPriority(data[3]);
       	p.setStatus("New");
       	p.setSubject(data[0]);
-      	p.setType(data[1]);
+      	p.setType(data[2]);
+      	p.setDescription(data[1]);
       	p.setComplaintId(comp_id);
       	Integer userid=((BigDecimal)session.getAttribute("userid")).intValue();
       	p.setUserId(userid);

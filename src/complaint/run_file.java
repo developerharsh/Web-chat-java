@@ -25,7 +25,7 @@ public class run_file
         
         String type="New Requirement";
         complaint_model p = new complaint_model();
-        	p.setType(type);
+        	//p.setType(type);
         	p.setAttachments("abc.jsp");
         	p.setCurrently_assigned(1001);
         	SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm:ss");
@@ -39,6 +39,8 @@ public class run_file
         	p.setSubject("welcome");
         	p.setType("bug");
         	p.setUserId(10001);
+        	p.setComplaintId(2);
+        	p.setDescription("abc");
         	s.save(p);
         
         Transaction t = s.beginTransaction();

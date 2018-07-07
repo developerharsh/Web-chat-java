@@ -10,7 +10,6 @@
 <body>
 
 <% String st=request.getParameter("name"); 
-   String reason=request.getParameter("reason"); 
 
 String complaintid=(String)request.getParameter("complaintid");
 
@@ -40,7 +39,7 @@ String name="";
 if(it.hasNext()){
 	name=(String)it.next();
 }
-String comment="Assigned to:"+name+", Reason:"+reason;
+String comment="Assigned to:"+name;
 hist_model h = new hist_model();
 h.setComplaintId(Integer.parseInt(complaintid));
 h.setStatus("Assigned");

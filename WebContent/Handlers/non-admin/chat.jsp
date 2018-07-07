@@ -53,19 +53,22 @@ List l1 = q1.list();
 Iterator it1 = l1.iterator();
 	if(it1.hasNext()){
 
-Query q= s.createSQLQuery("select subject from complaint where complaintid=?");
+Query q= s.createSQLQuery("select subject,description from complaint where complaintid=?");
 q.setParameter(0,complaintid);
 List l = q.list();
 Iterator it = l.iterator();
 String subject="";
+String desc="";
 	if(it.hasNext()){
-		Object st=(Object)it.next();
-		subject=(String)st;
+		Object st[]=(Object[])it.next();
+		subject=(String)st[0];
+		desc=(String)st[1];
 	}%>
 	
 	<p><strong>Subject:</strong><%=subject %>
 	<a href="history.jsp?complaintid=<%=complaintid %>" class="positive ui button" style="float:right;" >Synopsis</a></p>
 
+	<p><strong>Description:</strong><%=desc%></p>
  <%  q= s.createSQLQuery("select sender,attachments,text,sname from messages where complaintid=?");
  q.setParameter(0,complaintid);
   l = q.list();
@@ -137,10 +140,17 @@ String status="";
   </div>
 
     </form>
-
+	
+	<div class="ui divided items">
     <form style="margin-top: 10px" class="ui form" method="POST" action="reassign.jsp?complaintid=<%=complaintid%>">
-      <button class="positive ui button" type="submit">Reassign</button>
+    	<div class="field">
+    <div class="ui action input">
+  
+      <input type="text" placeholder="Reason" name="Reason">
+      <button class="ui blue button" type="submit">Reassign</button>
+  </div></div>
     </form>
+    </div>
 </div>
 <%}
     s.close();

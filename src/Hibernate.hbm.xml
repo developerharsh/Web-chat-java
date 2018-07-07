@@ -27,6 +27,7 @@
         <property name="userId" column="userId"> </property>
         <property name="subject" column="subject"> </property>
         <property name="module" column="module"> </property>
+        <property name="description" column="description"></property>
         <property name="type" column="type"> </property>
         <property name="priority" column="priority"> </property>
         <property name="status" column="status"> </property>

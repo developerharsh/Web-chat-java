@@ -11,6 +11,7 @@
 
 <% 
 String complaintid=(String)request.getParameter("complaintid");
+String reason=request.getParameter("Reason");
 
 Configuration cfg=new Configuration();
 cfg.configure("Hibernate.cfg.xml");
@@ -32,7 +33,7 @@ t.commit();
 hist_model h = new hist_model();
 h.setComplaintId(Integer.parseInt(complaintid));
 h.setStatus("Reassigned");
-h.setComments("Reassign request made");
+h.setComments("Reason: "+reason);
 SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm:ss");
 String time = localDateFormat.format(new Date());
 h.setDatetime(java.sql.Date.valueOf(java.time.LocalDate.now())+" "+time);
