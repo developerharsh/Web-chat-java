@@ -82,7 +82,7 @@ String desc="";
 		<img src="../Resources/loading_dots.gif" style="width:15%;position: absolute;left: 68%;top: 77.8%;">
 	<% }else{
 
-  q= s.createSQLQuery("select sender,attachments,text,sname from messages where complaintid=?");
+  q= s.createSQLQuery("select sender,att_name,text,sname from messages where complaintid=?");
  q.setParameter(0,complaintid);
  l = q.list();
  it = l.iterator();%>
@@ -101,7 +101,7 @@ String desc="";
 			
 		<%}else{%>
 		    
-			<a style="position: relative;left:78%" href="download"><i class="download icon"></i> download</a>
+			<a style="position: relative;left:78%" href="download?file=<%=obj[1]%>"><i class="download icon"></i> download</a>
 		<% }%>
 		</div>
 	<%}else{%>
@@ -114,7 +114,7 @@ String desc="";
 			
 		<%}else{%>
 		
-			<a href="download"><i class="download icon"></i> download</a>
+			<a href="download?file=<%=obj[1]%>"><i class="download icon"></i> download</a>
 			<%} %>
 			</div>
 	<%}%>

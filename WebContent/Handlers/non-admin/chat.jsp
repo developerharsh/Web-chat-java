@@ -69,7 +69,7 @@ String desc="";
 	<a href="history.jsp?complaintid=<%=complaintid %>" class="positive ui button" style="float:right;" >Synopsis</a></p>
 
 	<p><strong>Description:</strong><%=desc%></p>
- <%  q= s.createSQLQuery("select sender,attachments,text,sname from messages where complaintid=?");
+ <%  q= s.createSQLQuery("select sender,att_name,text,sname from messages where complaintid=?");
  q.setParameter(0,complaintid);
   l = q.list();
  it = l.iterator();%>
@@ -87,7 +87,7 @@ String desc="";
 			<p align="right"><%=obj[2] %></p>
 			
 		<%}else{%>
-			<a style="position: relative;left:78%" href="download?attachment=<%=obj[1]%>"><i class="download icon"></i> download</a>
+			<a style="position: relative;left:78%" href="download?file=<%=obj[1]%>"><i class="download icon"></i> download</a>
 		<% }%>
 		</div>
 	<%}else{%>
@@ -98,7 +98,7 @@ String desc="";
 			<p><%=obj[2] %></p>
 			
 		<%}else{%>
-			<a href="download?attachment=<%=obj[1]%>"><i class="download icon"></i> download</a>
+			<a href="download?file=<%=obj[1]%>"><i class="download icon"></i> download</a>
 			<%} %>
 			</div>
 	<%}%>

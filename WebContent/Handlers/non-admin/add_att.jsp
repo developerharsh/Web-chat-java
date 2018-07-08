@@ -4,8 +4,8 @@
 <%@ page import="javax.servlet.http.*" %>
 <%@ page import="org.apache.commons.fileupload.*" %>
 <%@ page import="org.apache.commons.fileupload.disk.*" %>
-<%@ page import="org.apache.commons.fileupload.servlet.*,history.hist_model" %>
-<%@ page import="org.apache.commons.io.output.*,java.math.BigDecimal" %>
+<%@ page import="org.apache.commons.fileupload.servlet.*,history.hist_model,javax.sql.rowset.serial.SerialBlob" %>
+<%@ page import="org.apache.commons.io.output.*,java.math.BigDecimal,java.sql.Blob" %>
 <%@page import="java.util.Iterator,java.util.List,org.hibernate.*,org.hibernate.cfg.*,java.util.Date,java.text.SimpleDateFormat,message.msg_model" %>
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -18,6 +18,7 @@
 
 <%! String data[]=new String[4]; 
 	Integer createdFileName;
+	byte byt[];
 	String savedFileName="null";
 	String st;
 	
@@ -89,13 +90,15 @@ while (iter.hasNext()) {
     	  createdFileName=000000;
       }
       String abc= fileName.substring(i, fileName.length());
-      out.println(abc);
-      boolean isInMemory = fi.isInMemory();
+      //out.println(abc);
+      //boolean isInMemory = fi.isInMemory();
       long sizeInBytes = fi.getSize();
       savedFileName=createdFileName+abc;
-      file = new File( "G:\\" + savedFileName) ;
-      fi.write( file ) ;
-      out.println("Uploaded Filename: " + fileName + "<br>");
+      //file = new File( "G:\\" + savedFileName) ;
+      //fi.write( file ) ;
+      byt=fi.get();
+      Blob blob=new SerialBlob(byt);
+      System.out.println(byt);
       
       
       
@@ -131,7 +134,8 @@ while (iter.hasNext()) {
       msg_model m = new msg_model();
       	
       m.setComplaintid(complaintid);
-  	m.setAttachments(savedFileName);
+  	m.setAttachments(blob);
+  	m.setAtt_name(savedFileName);
    SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm:ss");
    String time = localDateFormat.format(new Date());
    m.setDatetime(java.sql.Date.valueOf(java.time.LocalDate.now())+" "+time);

@@ -44,7 +44,7 @@
 	System.out.println("Loaded Session ..........");
 
 	//Integer userid=((BigDecimal)session.getAttribute("userid")).intValue();
-	Query q= s.createSQLQuery("select subject,attachments,module,type,priority,datetime,currently_assigned,description from complaint where complaintid=?");
+	Query q= s.createSQLQuery("select subject,att_name,module,type,priority,datetime,currently_assigned,description from complaint where complaintid=?");
 	q.setParameter(0, complaintid);
 	List l = q.list();
 	Iterator it = l.iterator();
@@ -86,7 +86,7 @@
         <p><strong>Attachments:</strong></p> 
       </div> 
     </div>
-    <a href="download?attachment=<%=attachments%>"><img src="download.jpg"></a>
+    <a href="download?file=<%=attachments%>"><img src="download.jpg"></a>
      
   </div>
   <% }%>

@@ -33,8 +33,10 @@ public class Download extends HttpServlet {
 	byte byt[];
 	String fileName;
 	Blob b;
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		
+		String file=request.getParameter("file");
+		System.out.println(file);
 		Configuration cfg=new Configuration();
 		cfg.configure("Hibernate.cfg.xml");
 		System.out.println("Loaded Configuration .........");
@@ -45,7 +47,8 @@ public class Download extends HttpServlet {
 		Session s=sf.openSession();
 		System.out.println("Loaded Session ..........");
 		
-		Query q=s.createSQLQuery("select attachments,att_name from messages where count=234");
+		Query q=s.createSQLQuery("select attachments,att_name from messages where att_name=?");
+		q.setParameter(0, file);
 		List l=q.list();
 		Iterator it = l.iterator();
 		

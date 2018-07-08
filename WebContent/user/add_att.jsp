@@ -131,7 +131,7 @@ while (iter.hasNext()) {
       msg_model m = new msg_model();
       	
       m.setComplaintid(complaintid);
-  	m.setAttachments(savedFileName);
+  	//m.setAttachments(savedFileName);
    SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm:ss");
    String time = localDateFormat.format(new Date());
    m.setDatetime(java.sql.Date.valueOf(java.time.LocalDate.now())+" "+time);
