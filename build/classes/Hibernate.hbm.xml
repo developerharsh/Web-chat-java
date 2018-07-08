@@ -31,6 +31,7 @@
         <property name="type" column="type"> </property>
         <property name="priority" column="priority"> </property>
         <property name="status" column="status"> </property>
+        <property name="att_name" column="att_name"> </property>
         <property name="attachments" column="attachments"> </property>
         <property name="currently_assigned" column="currently_assigned"> </property>
         <property name="dateTime" column="dateTime"> </property>

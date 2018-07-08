@@ -4,11 +4,13 @@
 <%@ page import="org.apache.commons.fileupload.*" %>
 <%@ page import="org.apache.commons.fileupload.disk.*" %>
 <%@ page import="org.apache.commons.fileupload.servlet.*,history.hist_model" %>
-<%@ page import="org.apache.commons.io.output.*,java.math.BigDecimal" %>
+<%@ page import="org.apache.commons.io.output.*,java.math.BigDecimal,java.sql.Blob,javax.sql.rowset.serial.SerialBlob" %>
 <%@page import="java.util.Iterator,java.util.List,org.hibernate.*,org.hibernate.cfg.*,java.util.Date,java.text.SimpleDateFormat,complaint.complaint_model" %>
 <%! String data[]=new String[5]; 
 	Integer createdFileName;
 	String savedFileName="null";
+	byte byt[];
+	Blob blob;
 	String st;
 	Integer comp_id=0;%>
 <% 
@@ -84,13 +86,16 @@ while (iter.hasNext()) {
     	  createdFileName=000000;
       }
       String abc= fileName.substring(i, fileName.length());
-      out.println(abc);
-      boolean isInMemory = fi.isInMemory();
+      //out.println(abc);
+      //boolean isInMemory = fi.isInMemory();
       long sizeInBytes = fi.getSize();
       savedFileName=createdFileName+abc;
-      file = new File( "G:\\" + savedFileName) ;
-      fi.write( file ) ;
-      out.println("Uploaded Filename: " + fileName + "<br>");
+      byt=fi.get();
+      blob=new SerialBlob(byt);
+      //System.out.println(byt);
+      //file = new File( "G:\\" + savedFileName) ;
+      //fi.write( file ) ;
+      //out.println("Uploaded Filename: " + fileName + "<br>");
       
       }
       
@@ -112,7 +117,8 @@ while (iter.hasNext()) {
       	q.executeUpdate();
       }
       ta1.commit();	
-      	p.setAttachments(savedFileName);
+      	p.setAttachments(blob);
+      	p.setAtt_name(savedFileName);
       	SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm:ss");
           String time = localDateFormat.format(new Date());
       		//System.out.println(time);

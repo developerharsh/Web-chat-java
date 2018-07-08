@@ -3,7 +3,7 @@
   
   <servlet>
   		<servlet-name>F1</servlet-name>
-  		<servlet-class>download.Download</servlet-class>
+  		<servlet-class>download.download1</servlet-class>
   </servlet>
   
   <servlet-mapping>

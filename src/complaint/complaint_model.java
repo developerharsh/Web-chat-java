@@ -1,5 +1,7 @@
 package complaint;
 import javax.persistence.*;
+
+import java.sql.Blob;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -13,7 +15,8 @@ public class complaint_model
 	private String type;
 	private String priority;
 	private String status;
-	private String attachments;
+	private String att_name;
+	private Blob attachments;
 	private Integer currently_assigned;
 	private String dateTime;
 	private String description;
@@ -67,10 +70,17 @@ public class complaint_model
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public String getAttachments() {
+	
+	public String getAtt_name() {
+		return att_name;
+	}
+	public void setAtt_name(String att_name) {
+		this.att_name = att_name;
+	}
+	public Blob getAttachments() {
 		return attachments;
 	}
-	public void setAttachments(String attachments) {
+	public void setAttachments(Blob attachments) {
 		this.attachments = attachments;
 	}
 	public Integer getCurrently_assigned() {
