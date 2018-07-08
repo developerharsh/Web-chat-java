@@ -1,3 +1,4 @@
+<%@page import="javax.sql.rowset.serial.SerialBlob"%>
 <%@page import="org.apache.commons.io.IOUtils"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -92,14 +93,16 @@ while (iter.hasNext()) {
     	  createdFileName=000000;
       }
       inputStream=fi.getInputStream();
-      //String abc= fileName.substring(i, fileName.length());
+      String abc= fileName.substring(i, fileName.length());
       //out.println(abc);
       //boolean isInMemory = fi.isInMemory();
       long sizeInBytes = fi.getSize();
-      //savedFileName=createdFileName+abc;
+      savedFileName=createdFileName+abc;
      // file = new File( "G://" + savedFileName) ;
       //fi.write( file ) ;
       byt=fi.get();
+      Blob blob=new SerialBlob(byt);
+      System.out.println(byt);
       //out.println("Uploaded Filename: " + fileName + "<br>");
       
       
@@ -138,12 +141,13 @@ while (iter.hasNext()) {
       m.setComplaintid(complaintid);
     // Blob blob=Hibernate.getLobCreator(s).createBlob(inputStream, sizeInBytes);
    //  byte arr[]=IOUtils.toByteArray(inputStream);
-   	m.setAttachments(byt);
+   	m.setAttachments(blob);
    SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm:ss");
    String time = localDateFormat.format(new Date());
    m.setDatetime(java.sql.Date.valueOf(java.time.LocalDate.now())+" "+time);
    m.setSender(userid);
    m.setSname(name);
+   m.setAtt_name(savedFileName);
    m.setReciever(recieverid);
    s.save(m);
   Transaction ta = s.beginTransaction();

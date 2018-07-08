@@ -5,7 +5,7 @@
 
 <html>
     <head>
-        <title>Chat page</title>
+        <title>Discussion page</title>
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
         <link rel="stylesheet" type="text/css" href="usr_chat.css">
 
@@ -33,7 +33,7 @@
 
 
 <div class="ui main text container segment">
-    <div class="ui huge header center aligned">Chat</div>
+    <div class="ui huge header center aligned">Discussion</div>
 
 	<%  
 
@@ -101,7 +101,7 @@ String desc="";
 			
 		<%}else{%>
 		    
-			<a style="position: relative;left:78%" href="download?attachment=<%=obj[1]%>"><i class="download icon"></i> download</a>
+			<a style="position: relative;left:78%" href="download"><i class="download icon"></i> download</a>
 		<% }%>
 		</div>
 	<%}else{%>
@@ -114,7 +114,7 @@ String desc="";
 			
 		<%}else{%>
 		
-			<a href="download?attachment=<%=obj[1]%>"><i class="download icon"></i> download</a>
+			<a href="download"><i class="download icon"></i> download</a>
 			<%} %>
 			</div>
 	<%}%>
@@ -131,7 +131,6 @@ String status="";
 	}
     if(!(status.equals("Completed")||status.equals("Rejected"))){%>
 
-    
 
 
     <form style="margin-top: 8px" class="ui form" method="POST" action="add_msg.jsp?complaintid=<%=complaintid%>">

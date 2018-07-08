@@ -8,10 +8,18 @@ public class msg_model
 	private String reciever;
 	private String complaintid;
 	private String text;
-	private byte[] attachments;
+	private Blob attachments;
+	private String att_name;
 	private String datetime;
 	private Integer count;
 	private String sname;
+	
+	public String getAtt_name() {
+		return att_name;
+	}
+	public void setAtt_name(String att_name) {
+		this.att_name = att_name;
+	}
 	public String getSname() {
 		return sname;
 	}
@@ -51,10 +59,11 @@ public class msg_model
 	}
 	
 	
-	public byte[] getAttachments() {
+	
+	public Blob getAttachments() {
 		return attachments;
 	}
-	public void setAttachments(byte[] attachments) {
+	public void setAttachments(Blob attachments) {
 		this.attachments = attachments;
 	}
 	public String getDatetime() {

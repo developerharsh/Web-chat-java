@@ -80,6 +80,6 @@
         <property name="attachments" column="attachments"> </property>
         <property name="text" column="text"> </property>
         <property name="sname" column="sname"> </property>
-        
+        <property name="att_name" column="att_name"> </property>
     </class>
 </hibernate-mapping>

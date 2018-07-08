@@ -5,7 +5,7 @@
 
 <html>
     <head>
-        <title> Chat page</title>
+        <title> Discussion page</title>
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
         <link rel="stylesheet" type="text/css" href="nachat.css">
 
@@ -32,7 +32,7 @@
 
 
 <div class="ui main text container segment">
-    <div class="ui huge header center aligned">Chat</div>
+    <div class="ui huge header center aligned">Discussion</div>
 
 	<%  
 	 
