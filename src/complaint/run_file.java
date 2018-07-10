@@ -1,3 +1,7 @@
+/*
+ * Author: Harsh Chauhan 
+ */
+
 package complaint;
 
 import java.text.SimpleDateFormat;
@@ -26,7 +30,7 @@ public class run_file
         String type="New Requirement";
         complaint_model p = new complaint_model();
         	//p.setType(type);
-        	p.setAttachments("abc.jsp");
+        	//p.setAttachments("abc.jsp");
         	p.setCurrently_assigned(1001);
         	SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm:ss");
             String time = localDateFormat.format(new Date());

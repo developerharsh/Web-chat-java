@@ -1,3 +1,7 @@
+/*
+ * Author: Harsh Chauhan 
+ */
+
 package comp_type;
 
 public class type_model {

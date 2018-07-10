@@ -39,16 +39,22 @@
 	if(it.hasNext())
 	{
 		Object st[] = (Object[])it.next();
-	    response.sendRedirect("user_landing.jsp");
+	    response.sendRedirect("./user/user_landing.jsp");
 	    session.setAttribute("userid",st[0]);
 	}
 	
 	else if(it1.hasNext()){
-		out.println("non admin");
+		Object st[] = (Object[])it1.next();
+		session.setAttribute("id",st[0]);
+		if(st[4].equals("yes")){
+			response.sendRedirect("./Handlers/admin/landing.jsp");
+		}else{
+			response.sendRedirect("./Handlers/non-admin/landing.jsp");
+		}
 	}
 	
 	else{
-		response.sendRedirect("../index.jsp");
+		response.sendRedirect("index.jsp");
 	}
 
 	
